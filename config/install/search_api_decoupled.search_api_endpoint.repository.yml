@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - search_api.index.fcrepo
+  module:
+  - search_web_components
+third_party_settings:
+  search_web_components:
+    sorts:
+    
+    - label: Relevance
+      key: search_api_relevance
+      order: desc
+    page_sizes:
+    
+    - label: '10'
+      key: '10'
+    displays:
+    
+    - label: List
+      key: list
+    results:
+      field: ''
+      mappings:
+      
+      - element: search-result-element-default
+        keys:
+        - default
+        settings: ''
+id: repository
+label: Repository
+description: 'FCRepo Endpoint'
+index: fcrepo
+limit: 20
+items_per_page_options:
+- 10
+searched_fields:
+  text: text
+parse_mode: direct
+excluded_fields: {}
+default_sort: search_api_relevance
+default_sort_order: desc
+skip_field_extraction: true
+ensure_result_item_url: false

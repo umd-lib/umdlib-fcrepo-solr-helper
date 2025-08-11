@@ -1,6 +1,6 @@
-name: 'Solrizer Helper'
+name: 'FCRepo Solr Helper'
 type: module
-description: 'Provides setup and customization for Solrizer'
+description: 'Provides setup and customization for FCRepo Solr'
 package: UMDDS
 core_version_requirement: ^11
 dependencies:
