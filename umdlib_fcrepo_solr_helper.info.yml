@@ -1,0 +1,7 @@
+name: 'Solrizer Helper'
+type: module
+description: 'Provides setup and customization for Solrizer'
+package: UMDDS
+core_version_requirement: ^11
+dependencies:
+- search_api_decoupled:search_api_decoupled
