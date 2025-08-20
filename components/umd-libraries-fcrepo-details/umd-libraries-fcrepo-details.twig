@@ -1,0 +1,164 @@
+{% if heading %}
+  {{ heading }}
+{% endif %}
+
+<div class="{{ classes }}">
+
+  {% if iiif_id %}
+    {% set query_param = app.request.get('query') %}
+    <iframe class="mirador-viewer"
+      style="width: 100%; height: 700px;" title="Mirador Object"
+      src="{{ iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ query_param }}"
+      scrolling="no"
+      allowfullscreen="true"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true">
+        {{ error_message }}
+    </iframe>
+  {% endif %}
+
+  <div id="collection-home-button">
+    <br />
+    <div class="action-area">
+      {% if handle %}
+        <div id="clipboardjs-alert"></div>
+        <div id="copy-error"></div>
+        <a data-clipboard-text="{{ handle }}" class="btn clipboardjs-button btn-primary">Copy Permanent Link<span id="clipboardjs-alert"></span></a>
+        <a target="_blank"
+          href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ collection }}&ReferenceNumber={{ handle }}&CallNumber={{ identifier_1 }}"
+          class="button btn btn-primary">Request from Special Collections</a> 
+      {% endif %}
+      {% if pcdm_files %}
+        {{ pcdm_files }}
+      {% endif %}
+    </div>
+  </div>
+  <div id="copy-error"></div>
+
+  <table class="dc-item-metadata">
+    <caption>
+      <h2>{{ metadata_heading }}</h2>
+    </caption>
+    <tbody>
+      {% if title %}
+        <tr>
+          <th scope="row">Title</th>
+          <td>
+            {{ title }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if description %}
+        <tr>
+          <th scope="row">Description</th>
+          <td>
+            {{ description }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if extent %}
+        <tr>
+          <th scope="row">Extent</th>
+          <td>{{ extent }}</td>
+        </tr>
+      {% endif %}
+      {% if date %}
+        <tr>
+          <th scope="row">Date</th>
+          <td>{{ date }}</td>
+        </tr>
+      {% endif %}
+      {% if creator %}
+        <tr>
+          <th scope="row">Creator</th>
+          <td>
+            {{ creator }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if contributor %}
+        <tr>
+          <th scope="row">Contributor(s)</th>
+          <td>
+            {{ contributor }} 
+          </td>
+        </tr>
+      {% endif %}
+      {% if location %}
+        <tr>
+          <th scope="row">Location</th>
+          <td>{{ location }}</td>
+        </tr>
+      {% endif %}
+      {% if publisher %}
+        <tr>
+          <th scope="row">Publisher</th>
+          <td>{{ publisher }}</td>
+        </tr>
+      {% endif %}
+      {% if subject %}
+        <tr>
+          <th scope="row">Subject(s)</th>
+          <td>{{ subject }}</td>
+        </tr>
+      {% endif %}
+      {% if citation %}
+        <tr>
+          <th scope="row">Citation</th>
+          <td>{{ citation }}</td>
+        </tr>
+      {% endif %}
+      {% if resource_type %}
+        <tr>
+          <th scope="row">Resource Type</th>
+          <td>{{ resource_type }}</td>
+        </tr>
+      {% endif %}
+      {% if recipient %}
+        <tr>
+          <th scope="row">Recipient</th>
+          <td>{{ recipient }}</td>
+        </tr>
+      {% endif %}
+      {% if handle %}
+        <tr>
+          <th scope="row">Permanent Link</th>
+          <td>
+            {{ handle }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if rights %}
+        <tr>
+          <th scope="row">Rights</th>
+          <td>
+            {{ rights }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if terms %}
+        <tr>
+          <th scope="row">Terms of Use</th>
+          <td>
+           {{ terms }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if collection %}
+        <tr>
+          <th scope="row">Digital Collection(s)</th>
+          <td>
+            <dl>
+              {% if search_base %}
+                <a href="{{ search_base }}{{ collection }}">{{ collection }}</a>
+              {% else %}
+                {{ collection }}
+              {% endif %}
+            </dl>
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+</div>

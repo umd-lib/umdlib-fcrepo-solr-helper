@@ -1,0 +1,4 @@
+services:
+  Drupal\umdlib_fcrepo_solr_helper\EventSubscriber\SolrQueryAlterEventSubscriber:
+    tags:
+    - { name: 'event_subscriber' }

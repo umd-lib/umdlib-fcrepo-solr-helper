@@ -1,0 +1,92 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: UMD Lib FCRepo Details
+label: FCRepo Details
+group: UMD Libraries Search
+
+props:
+  type: object
+  properties:
+    key:
+      type: string
+      title: Classes
+      description: 'CSS Classes to add to the component'
+    metadata_heading:
+      type: string
+      title: Metadata Heading
+      description: 'Metadata Heading'
+    iiif_base:
+      type: string
+      title: IIIF Base URL
+    iiif_prefix:
+      type: string
+      title: IIIF Prefix
+    error_message:
+      type: string
+      title: IIIF Error message
+    search_base:
+      type: string
+      title: Search base used for linking back to search
+
+slots:
+  handle:
+    title: Handle
+    description: Object handle.
+  heading:
+    title: Heading
+    description: Page heading.
+  title:
+    title: Title
+    description: Object title.
+  description:
+    title: Description
+    description: Object description.
+  extent:
+    title: Extent
+    description: Object extent.
+  date:
+    title: Date
+    description: Object date.
+  creator:
+    title: Creator
+    description: Object creator(s).
+  contributor:
+    title: Contributor
+    description: Object contributor(s).
+  location:
+    title: Location
+    description: Object location.
+  publisher:
+    title: Publisher
+    description: Object publisher.
+  subject:
+    title: Subject
+    description: Object subject.
+  citation:
+    title: Citation
+    description: Object citation.
+  resource_type:
+    title: Resourse Type
+    description: Object resource type
+  recipient:
+    title: Recipient
+    description: Object recipient
+  scpa_collection:
+    title: SCPA Collection
+    description: Object SCPA collection
+  collection:
+    title: Collection
+    description: Object collection
+  terms:
+    title: Terms of use
+    description: Object terms
+  iiif_id:
+    title: IIIF ID
+    description: IIIF ID used for Mirador
+
+libraryOverrides:
+  dependencies:
+  - core/drupal
+  - core/once
+  js:
+    js/clipboard.min.js: {}
