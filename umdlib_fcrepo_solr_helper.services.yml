@@ -2,3 +2,8 @@ services:
   Drupal\umdlib_fcrepo_solr_helper\EventSubscriber\SolrQueryAlterEventSubscriber:
     tags:
     - { name: 'event_subscriber' }
+  umdlib_fcrepo_solr_helper.twig_extension:
+    arguments: [ '@renderer' ]
+    class: Drupal\umdlib_fcrepo_solr_helper\TwigExtension\FCRepoTwigExtension
+    tags:
+    - { name: twig.extension }

@@ -24,9 +24,6 @@ props:
     error_message:
       type: string
       title: IIIF Error message
-    search_base:
-      type: string
-      title: Search base used for linking back to search
 
 slots:
   handle:
@@ -71,12 +68,12 @@ slots:
   recipient:
     title: Recipient
     description: Object recipient
-  scpa_collection:
-    title: SCPA Collection
-    description: Object SCPA collection
   collection:
-    title: Collection
-    description: Object collection
+    title: Collection(s)
+    description: Object collection(s) with links
+  aeon_collection:
+    title: Aeon Collection
+    description: Collection string for Aeon link
   terms:
     title: Terms of use
     description: Object terms

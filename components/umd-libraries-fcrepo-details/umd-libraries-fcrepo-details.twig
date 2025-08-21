@@ -1,14 +1,21 @@
+{% set scpa_collections = ['International Piano Archives at Maryland', 'Michelle Smith Performing Arts Library', 'Special Collections in Performing Arts'] %}
+{% if aeon_collection in scpa_collections %}
+  {% set scpa_collection = 'SCPA' %}
+{% else %}
+  {% set scpa_collection = 'MDRM' %}
+{% endif %}
+
 {% if heading %}
   {{ heading }}
 {% endif %}
 
 <div class="{{ classes }}">
-
   {% if iiif_id %}
     {% set query_param = app.request.get('query') %}
+    {% set query_param2 = app.request.query.all %}
     <iframe class="mirador-viewer"
-      style="width: 100%; height: 700px;" title="Mirador Object"
-      src="{{ iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ query_param }}"
+      title="Mirador Object"
+      src="{{ iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}"
       scrolling="no"
       allowfullscreen="true"
       webkitallowfullscreen="true"
@@ -25,7 +32,7 @@
         <div id="copy-error"></div>
         <a data-clipboard-text="{{ handle }}" class="btn clipboardjs-button btn-primary">Copy Permanent Link<span id="clipboardjs-alert"></span></a>
         <a target="_blank"
-          href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ collection }}&ReferenceNumber={{ handle }}&CallNumber={{ identifier_1 }}"
+          href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ aeon_collection }}&ReferenceNumber={{ handle }}&CallNumber={{ identifier_1 }}"
           class="button btn btn-primary">Request from Special Collections</a> 
       {% endif %}
       {% if pcdm_files %}
@@ -149,11 +156,7 @@
           <th scope="row">Digital Collection(s)</th>
           <td>
             <dl>
-              {% if search_base %}
-                <a href="{{ search_base }}{{ collection }}">{{ collection }}</a>
-              {% else %}
-                {{ collection }}
-              {% endif %}
+              {{ collection }}
             </dl>
           </td>
         </tr>
