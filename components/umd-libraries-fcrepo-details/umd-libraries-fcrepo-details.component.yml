@@ -15,6 +15,14 @@ props:
       type: string
       title: Metadata Heading
       description: 'Metadata Heading'
+    collections_heading:
+      type: string
+      title: Collections Heading
+      description: 'Collections Heading'
+    actions_heading:
+      type: string
+      title: Actions Heading
+      description: 'Actions Heading'
     iiif_base:
       type: string
       title: IIIF Base URL
@@ -29,9 +37,9 @@ slots:
   handle:
     title: Handle
     description: Object handle.
-  heading:
-    title: Heading
-    description: Page heading.
+  page_heading:
+    title: Page Heading
+    description: Page heading, such as object title.
   title:
     title: Title
     description: Object title.

@@ -5,8 +5,8 @@
   {% set scpa_collection = 'MDRM' %}
 {% endif %}
 
-{% if heading %}
-  {{ heading }}
+{% if page_heading %}
+  <h1>{{ page_heading }}</h1>
 {% endif %}
 
 <div class="{{ classes }}">
@@ -22,6 +22,10 @@
       mozallowfullscreen="true">
         {{ error_message }}
     </iframe>
+  {% endif %}
+
+  {% if actions_heading %}
+    <h2>{{ actions_heading }}</h2>
   {% endif %}
 
   <div id="collection-home-button">
@@ -63,44 +67,16 @@
           </td>
         </tr>
       {% endif %}
-      {% if extent %}
-        <tr>
-          <th scope="row">Extent</th>
-          <td>{{ extent }}</td>
-        </tr>
-      {% endif %}
       {% if date %}
         <tr>
           <th scope="row">Date</th>
           <td>{{ date }}</td>
         </tr>
       {% endif %}
-      {% if creator %}
-        <tr>
-          <th scope="row">Creator</th>
-          <td>
-            {{ creator }}
-          </td>
-        </tr>
-      {% endif %}
-      {% if contributor %}
-        <tr>
-          <th scope="row">Contributor(s)</th>
-          <td>
-            {{ contributor }} 
-          </td>
-        </tr>
-      {% endif %}
       {% if location %}
         <tr>
           <th scope="row">Location</th>
           <td>{{ location }}</td>
-        </tr>
-      {% endif %}
-      {% if publisher %}
-        <tr>
-          <th scope="row">Publisher</th>
-          <td>{{ publisher }}</td>
         </tr>
       {% endif %}
       {% if subject %}
@@ -113,18 +89,6 @@
         <tr>
           <th scope="row">Citation</th>
           <td>{{ citation }}</td>
-        </tr>
-      {% endif %}
-      {% if resource_type %}
-        <tr>
-          <th scope="row">Resource Type</th>
-          <td>{{ resource_type }}</td>
-        </tr>
-      {% endif %}
-      {% if recipient %}
-        <tr>
-          <th scope="row">Recipient</th>
-          <td>{{ recipient }}</td>
         </tr>
       {% endif %}
       {% if handle %}
@@ -143,6 +107,46 @@
           </td>
         </tr>
       {% endif %}
+      {% if extent %}
+        <tr>
+          <th scope="row">Extent</th>
+          <td>{{ extent }}</td>
+        </tr>
+      {% endif %}
+      {% if creator %}
+        <tr>
+          <th scope="row">Creator</th>
+          <td>
+            {{ creator }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if contributor %}
+        <tr>
+          <th scope="row">Contributor(s)</th>
+          <td>
+            {{ contributor }} 
+          </td>
+        </tr>
+      {% endif %}
+      {% if publisher %}
+        <tr>
+          <th scope="row">Publisher</th>
+          <td>{{ publisher }}</td>
+        </tr>
+      {% endif %}
+      {% if resource_type %}
+        <tr>
+          <th scope="row">Resource Type</th>
+          <td>{{ resource_type }}</td>
+        </tr>
+      {% endif %}
+      {% if recipient %}
+        <tr>
+          <th scope="row">Recipient</th>
+          <td>{{ recipient }}</td>
+        </tr>
+      {% endif %}
       {% if terms %}
         <tr>
           <th scope="row">Terms of Use</th>
@@ -151,7 +155,15 @@
           </td>
         </tr>
       {% endif %}
-      {% if collection %}
+    </tbody>
+  </table>
+
+  {% if collection %}
+  <table class="dc-item-metadata">
+    <caption>
+      <h2>{{ collections_heading }}</h2>
+    </caption>
+    <tbody>
         <tr>
           <th scope="row">Digital Collection(s)</th>
           <td>
@@ -160,8 +172,7 @@
             </dl>
           </td>
         </tr>
-      {% endif %}
     </tbody>
   </table>
-
+  {% endif %}
 </div>
