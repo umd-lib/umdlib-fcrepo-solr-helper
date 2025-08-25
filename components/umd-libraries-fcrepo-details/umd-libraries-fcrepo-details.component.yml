@@ -80,6 +80,9 @@ slots:
   iiif_id:
     title: IIIF ID
     description: IIIF ID used for Mirador
+  downloadable:
+    title: Download URI
+    description: Record URI for file download
 
 libraryOverrides:
   dependencies:

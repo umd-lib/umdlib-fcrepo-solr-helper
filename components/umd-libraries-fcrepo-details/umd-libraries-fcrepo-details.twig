@@ -35,8 +35,8 @@
           href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ aeon_collection }}&ReferenceNumber={{ handle }}&CallNumber={{ identifier_1 }}"
           class="button btn btn-primary">Request from Special Collections</a> 
       {% endif %}
-      {% if pcdm_files %}
-        {{ pcdm_files }}
+      {% if downloadable %}
+        <a class="button btn btn-primary" href="{{ downloadable }}">PDF Download</a>
       {% endif %}
     </div>
   </div>
