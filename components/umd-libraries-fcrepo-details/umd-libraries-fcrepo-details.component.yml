@@ -91,6 +91,9 @@ slots:
   downloadable:
     title: Download URI
     description: Record URI for file download
+  call_number:
+    title: Identifier / Call number
+    description: Record URI for file download
 
 libraryOverrides:
   dependencies:
