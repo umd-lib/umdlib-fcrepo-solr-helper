@@ -88,5 +88,7 @@ libraryOverrides:
   dependencies:
   - core/drupal
   - core/once
+  - core/jquery
   js:
     js/clipboard.min.js: {}
+    umd-libraries-fcrepo-details.js: {}

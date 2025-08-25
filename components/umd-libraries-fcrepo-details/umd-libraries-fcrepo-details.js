@@ -1,6 +1,6 @@
 window.ClipboardJS = window.ClipboardJS || Clipboard;
 
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, once) {
 
   'use strict';
   Drupal.behaviors.clipboardjs = {
@@ -52,4 +52,4 @@ window.ClipboardJS = window.ClipboardJS || Clipboard;
       });
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, once);
