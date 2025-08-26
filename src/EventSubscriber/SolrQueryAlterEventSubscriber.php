@@ -34,11 +34,12 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     $search_index = $query->getIndex();
     if (!empty($search_index)) {
       $index_id = $search_index->id();
-      $server_id = $search_index->getServerId();
-      if ($server_id != 'solrizer' || $index_id != 'details') {
+      if (!str_contains($index_id, "_nested")) {
         return;
       }
     }
+    // If an index contains _nested, we process nested fields.
+
     $results = $event->getSolariumResult();
     $results = $event->getSearchApiResultSet();
     if ($results->getResultCount() < 1) {
@@ -99,11 +100,11 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     $search_index = $search_query->getIndex();
     if ($search_index) {
       $index_id = $search_index->id();
-      $server_id = $search_index->getServerId();
-      if ($server_id != 'solrizer' && $index_id != 'details') {
+      if (!str_contains($index_id, "_nested")) {
         return;
       }
     }
+    // If an index contains _nested, we add nested fields.
     $query = $event->getSolariumQuery();
     $query->addField('[child]');
     $query->addField('object__rights_holder');
