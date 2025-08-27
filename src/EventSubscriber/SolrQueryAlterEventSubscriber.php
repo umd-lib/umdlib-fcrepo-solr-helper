@@ -31,7 +31,27 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
    */
   public function postExtractResults(PostExtractResultsEvent $event): void {
     $query = $event->getSearchApiQuery();
+
     $search_index = $query->getIndex();
+    if (empty($search_index)) {
+      return;
+    }
+
+    $server_id = $search_index->getServerId();
+    if ($server_id != "fcrepo") {
+      return;
+    }
+
+    $results = $event->getSolariumResult();
+    $results = $event->getSearchApiResultSet();
+    if ($results->getResultCount() < 1) {
+      return;
+    }
+
+
+    if ($index_id == 'searcher') {
+    }
+
     if (!empty($search_index)) {
       $index_id = $search_index->id();
       if (!str_contains($index_id, "_nested")) {
@@ -40,11 +60,6 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     }
     // If an index contains _nested, we process nested fields.
 
-    $results = $event->getSolariumResult();
-    $results = $event->getSearchApiResultSet();
-    if ($results->getResultCount() < 1) {
-      return;
-    }
     $result_items = $results->getResultItems();
     foreach ($result_items as $key => $item) {
       $extra = $item->getExtraData('search_api_solr_document');
@@ -98,14 +113,29 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
   public function preQuery(PreQueryEvent $event): void {
     $search_query = $event->getSearchApiQuery();
     $search_index = $search_query->getIndex();
-    if ($search_index) {
-      $index_id = $search_index->id();
-      if (!str_contains($index_id, "_nested")) {
-        return;
-      }
+    if (empty($search_index)) {
+      return;
+    }
+
+    $server_id = $search_index->getServerId();
+    if ($server_id != "fcrepo") {
+      return;
+    }
+
+    $query = $event->getSolariumQuery();
+    
+    $query->createFilterQuery('published_filter')->setQuery('is_published:true');
+    $index_id = $search_index->id();
+    if ($index_id == 'searcher') {
+      $query->createFilterQuery('discoverable_filter')->setQuery('is_discoverable:true');
+      // $query->createFilterQuery('whca_filter')->setQuery('-adminset__title__display:WHCA Pool Reports');
+    }
+
+    $index_id = $search_index->id();
+    if (!str_contains($index_id, "_nested")) {
+      return;
     }
     // If an index contains _nested, we add nested fields.
-    $query = $event->getSolariumQuery();
     $query->addField('[child]');
     $query->addField('object__rights_holder');
     $query->addField('object__subject');
