@@ -23,7 +23,7 @@
   {% if iiif_id %}
     {% set query_param = app.request.get('query') %}
     {% set query_param2 = app.request.query.all %}
-    <iframe class="mirador-viewer s-margin-general-small"
+    <iframe class="mirador-viewer s-margin-general-medium"
       title="Mirador Object"
       src="{{ iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}"
       scrolling="no"
