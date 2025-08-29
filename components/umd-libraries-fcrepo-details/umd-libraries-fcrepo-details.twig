@@ -1,3 +1,11 @@
+{# 
+/**
+ * @file
+ * UMD Libraries FCRepo Details component.
+ *
+ */
+ #}
+
 {% set scpa_collections = ['International Piano Archives at Maryland', 'Michelle Smith Performing Arts Library', 'Special Collections in Performing Arts'] %}
 {% if aeon_collection in scpa_collections %}
   {% set scpa_collection = 'SCPA' %}
@@ -5,15 +13,17 @@
   {% set scpa_collection = 'MDRM' %}
 {% endif %}
 
-{% if page_heading %}
-  <h1>{{ page_heading }}</h1>
-{% endif %}
+<div class="umd-lib digital-collection fcrepo-details {{ classes}}">
+  {# page heading #}
+  {% if page_heading %}
+    <h1 class="t-title-large s-margin-heading-large">{{ page_heading }}</h1>
+  {% endif %}
 
-<div class="{{ classes }}">
+  {# mirador viewer #}
   {% if iiif_id %}
     {% set query_param = app.request.get('query') %}
     {% set query_param2 = app.request.query.all %}
-    <iframe class="mirador-viewer"
+    <iframe class="mirador-viewer s-margin-general-small"
       title="Mirador Object"
       src="{{ iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}"
       scrolling="no"
@@ -24,155 +34,131 @@
     </iframe>
   {% endif %}
 
+  {# action area #}
   {% if actions_heading %}
-    <h2>{{ actions_heading }}</h2>
+    <h2 class="t-title-medium s-margin-heading-medium">{{ actions_heading }}</h2>
   {% endif %}
 
-  <div id="collection-home-button">
-    <br />
-    <div class="action-area">
+  <div class="action-area s-margin-general-small">
+    <div class="button-group s-margin-general-small">
       {% if handle %}
-        <div id="clipboardjs-alert"></div>
-        <div id="copy-error"></div>
-        <a data-clipboard-text="{{ handle }}" class="btn clipboardjs-button btn-primary">Copy Permanent Link<span id="clipboardjs-alert"></span></a>
+        <button data-clipboard-text="{{ handle }}" class="button umd-lib clipboardjs-button">Copy Permanent Link</button>
         <a target="_blank"
           href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ aeon_collection }}&ReferenceNumber={{ handle }}&CallNumber={{ call_number }}"
-          class="button btn btn-primary">Request from Special Collections</a> 
+          class="button umd-lib">
+          <span><svg title="new window icon" id="icon_new_window" aria-hidden="true" data-name="new-window-icon" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg"><path class="cls-1" d="M6.67,2.28H1.28S3.63,0,3.63,0h4.49s2.29,0,2.29,0h0s0,2.28,0,2.28h0v4.49s-2.29,2.35-2.29,2.35V3.95S1.55,10.67,1.55,10.67l-1.55-1.55L6.67,2.28Z"></path></svg></span>Request This Item<span class="sr-only">(opens in a new window)</span>
+        </a> 
       {% endif %}
       {% if downloadable %}
-        <a class="button btn btn-primary" href="{{ downloadable }}">PDF Download</a>
+        <a class="button umd-lib" role="button" href="{{ downloadable }}">PDF Download</a>
       {% endif %}
     </div>
+    <div class="action-messages">
+      <div id="clipboardjs-alert" aria-live="polite"></div>
+      <div id="copy-error" aria-live="polite"></div>
+    </div>
   </div>
-  <div id="copy-error"></div>
 
-  <table class="dc-item-metadata">
-    <caption>
-      <h2>{{ metadata_heading }}</h2>
-    </caption>
-    <tbody>
-      {% if title %}
-        <tr>
-          <th scope="row">Title</th>
-          <td>
-            {{ title }}
-          </td>
-        </tr>
-      {% endif %}
-      {% if description %}
-        <tr>
-          <th scope="row">Description</th>
-          <td>
-            {{ description }}
-          </td>
-        </tr>
-      {% endif %}
-      {% if date %}
-        <tr>
-          <th scope="row">Date</th>
-          <td>{{ date }}</td>
-        </tr>
-      {% endif %}
-      {% if location %}
-        <tr>
-          <th scope="row">Location</th>
-          <td>{{ location }}</td>
-        </tr>
-      {% endif %}
-      {% if subject %}
-        <tr>
-          <th scope="row">Subject(s)</th>
-          <td>{{ subject }}</td>
-        </tr>
-      {% endif %}
-      {% if citation %}
-        <tr>
-          <th scope="row">Citation</th>
-          <td>{{ citation }}</td>
-        </tr>
-      {% endif %}
-      {% if handle %}
-        <tr>
-          <th scope="row">Permanent Link</th>
-          <td>
-            {{ handle }}
-          </td>
-        </tr>
-      {% endif %}
-      {% if rights %}
-        <tr>
-          <th scope="row">Rights</th>
-          <td>
-            {{ rights }}
-          </td>
-        </tr>
-      {% endif %}
-      {% if extent %}
-        <tr>
-          <th scope="row">Extent</th>
-          <td>{{ extent }}</td>
-        </tr>
-      {% endif %}
-      {% if creator %}
-        <tr>
-          <th scope="row">Creator</th>
-          <td>
-            {{ creator }}
-          </td>
-        </tr>
-      {% endif %}
-      {% if contributor %}
-        <tr>
-          <th scope="row">Contributor(s)</th>
-          <td>
-            {{ contributor }} 
-          </td>
-        </tr>
-      {% endif %}
-      {% if publisher %}
-        <tr>
-          <th scope="row">Publisher</th>
-          <td>{{ publisher }}</td>
-        </tr>
-      {% endif %}
-      {% if resource_type %}
-        <tr>
-          <th scope="row">Resource Type</th>
-          <td>{{ resource_type }}</td>
-        </tr>
-      {% endif %}
-      {% if recipient %}
-        <tr>
-          <th scope="row">Recipient</th>
-          <td>{{ recipient }}</td>
-        </tr>
-      {% endif %}
-      {% if terms %}
-        <tr>
-          <th scope="row">Terms of Use</th>
-          <td>
-           {{ terms }}
-          </td>
-        </tr>
-      {% endif %}
-    </tbody>
-  </table>
+  {# metadata area #}
+  <h2 class="t-title-medium s-margin-heading-medium">{{ metadata_heading }}</h2>
+  <dl class="metadata-list s-margin-general-medium">
+    {% if title %}
+      <div>
+        <dt class="t-title-small c-content-primary">Title</dt>
+        <dd class="t-body-medium">{{ title }}</dd>
+      </div>
+    {% endif %}
+    {% if description %}
+      <div>
+        <dt class="t-title-small c-content-primary">Description</dt>
+        <dd class="t-body-medium">{{ description }}</dd>
+      </div>
+    {% endif %}
+    {% if date %}
+      <div>
+        <dt class="t-title-small c-content-primary">Date</dt>
+        <dd class="t-body-medium">{{ date }}</dd>
+      </div>
+    {% endif %}
+    {% if location %}
+      <div>
+        <dt class="t-title-small c-content-primary">Location</dt>
+        <dd class="t-body-medium">{{ location }}</dd>
+      </div>
+    {% endif %}
+    {% if subject %}
+      <div>
+        <dt class="t-title-small c-content-primary">Subject(s)</dt>
+        <dd class="t-body-medium">{{ subject }}</dd>
+      </div>
+    {% endif %}
+    {% if citation %}
+      <div>
+        <dt class="t-title-small c-content-primary">Citation</dt>
+        <dd class="t-body-medium">{{ citation }}</dd>
+      </div>
+    {% endif %}
+    {% if handle %}
+      <div>
+        <dt class="t-title-small c-content-primary">Permanent Link</dt>
+        <dd class="t-body-medium">{{ handle }}</dd>
+      </div>
+    {% endif %}
+    {% if rights %}
+      <div>
+        <dt class="t-title-small c-content-primary">Rights</dt>
+        <dd class="t-body-medium">{{ rights }}</dd>
+      </div>
+    {% endif %}
+    {% if extent %}
+      <div>
+        <dt class="t-title-small c-content-primary">Extent</dt>
+        <dd class="t-body-medium">{{ extent }}</dd>
+      </div>
+    {% endif %}
+    {% if creator %}
+      <div>
+        <dt class="t-title-small c-content-primary">Creator</dt>
+        <dd class="t-body-medium">{{ creator }}</dd>
+      </div>
+    {% endif %}
+    {% if contributor %}
+      <div>
+        <dt class="t-title-small c-content-primary">Contributor(s)</dt>
+        <dd class="t-body-medium">{{ contributor }}</dd>
+      </div>
+    {% endif %}
+    {% if publisher %}
+      <div>
+        <dt class="t-title-small c-content-primary">Publisher</dt>
+        <dd class="t-body-medium">{{ publisher }}</dd>
+      </div>
+    {% endif %}
+    {% if resource_type %}
+      <div>
+        <dt class="t-title-small c-content-primary">Resource Type</dt>
+        <dd class="t-body-medium">{{ resource_type }}</dd>
+      </div>
+    {% endif %}
+    {% if recipient %}
+      <div>
+        <dt class="t-title-small c-content-primary">Recipient</dt>
+        <dd class="t-body-medium">{{ recipient }}</dd>
+      </div>
+    {% endif %}
+    {% if terms %}
+      <div>
+        <dt class="t-title-small c-content-primary">Terms of Use</dt>
+        <dd class="t-body-medium">{{ terms }}</dd>
+      </div>
+    {% endif %}
+  </dl>
 
+  {# collection area #}
   {% if collection %}
-  <table class="dc-item-metadata">
-    <caption>
-      <h2>{{ collections_heading }}</h2>
-    </caption>
-    <tbody>
-        <tr>
-          <th scope="row">Digital Collection(s)</th>
-          <td>
-            <dl>
-              {{ collection }}
-            </dl>
-          </td>
-        </tr>
-    </tbody>
-  </table>
+    <h2 class="t-title-medium s-margin-heading-medium">{{ collections_heading }}</h2>
+    <dl class="collection-list s-margin-general-medium">
+      {{ collection }}
+    </dl>
   {% endif %}
 </div>

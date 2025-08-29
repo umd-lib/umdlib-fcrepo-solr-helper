@@ -1,4 +1,116 @@
-iframe.mirador-viewer {
+.umd-lib.digital-collection.fcrepo-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.umd-lib.fcrepo-details iframe.mirador-viewer {
   width: 100%;
-  height: 900px;
+  aspect-ratio: 3/4;
+}
+
+.umd-lib.fcrepo-details .action-area .button-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.umd-lib.fcrepo-details .action-area .button-group > * {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* center the text in the link */
+.umd-lib.fcrepo-details .action-area .button-group a {
+  text-align: center;
+}
+
+.umd-lib.fcrepo-details .action-area .button-group a span {
+  display: inline-block;
+
+  min-width: 1rem;
+  max-width: 1rem;
+
+  margin-right: 0.5rem;
+}
+
+.umd-lib.fcrepo-details .action-area .button-group a span path {
+  fill: white !important;
+}
+
+.umd-lib.fcrepo-details
+  .action-area
+  .action-messages
+  .clipboardjs-alert-content {
+  width: fit-content;
+  padding: 0.25rem 1rem;
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+
+  background-color: rgba(255, 213, 32, 0.2);
+}
+
+.umd-lib.fcrepo-details dl.metadata-list,
+.umd-lib.fcrepo-details dl.collection-list {
+  border-top: 1px solid var(--light-gray);
+}
+
+.umd-lib.fcrepo-details dl.metadata-list > div,
+.umd-lib.fcrepo-details dl.collection-list > div {
+  display: flex;
+  flex-direction: column;
+
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.umd-lib.fcrepo-details dl.metadata-list > div dt,
+.umd-lib.fcrepo-details dl.collection-list > div dt {
+  padding: 1rem 1rem 0rem 1rem;
+}
+
+.umd-lib.fcrepo-details dl.metadata-list > div dd {
+  padding: 1rem;
+}
+
+.umd-lib.fcrepo-details dl.collection-list > div > div dd {
+  padding: 1rem 1rem 0rem 1rem;
+}
+
+.umd-lib.fcrepo-details dl.collection-list > div > div dd:last-child {
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .umd-lib.fcrepo-details dl.metadata-list > div,
+  .umd-lib.fcrepo-details dl.collection-list > div {
+    flex-direction: row;
+  }
+
+  .umd-lib.fcrepo-details dl.metadata-list > div dt,
+  .umd-lib.fcrepo-details dl.collection-list > div dt {
+    padding: 1.5rem;
+
+    flex: 0 0 240px;
+  }
+
+  .umd-lib.fcrepo-details dl.metadata-list > div dd,
+  .umd-lib.fcrepo-details dl.collection-list > div > div dd {
+    padding: 1.5rem;
+  }
+
+  .umd-lib.fcrepo-details dl.collection-list > div > div {
+    flex: 1 1 auto;
+  }
+
+  .umd-lib.fcrepo-details dl.collection-list > div > div dd {
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .umd-lib.fcrepo-details dl.collection-list > div > div dd:last-child {
+    padding: 1.5rem;
+    border-bottom: none;
+  }
 }
