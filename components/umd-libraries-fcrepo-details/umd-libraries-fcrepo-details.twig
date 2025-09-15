@@ -1,7 +1,7 @@
 {# 
 /**
  * @file
- * UMD Libraries FCRepo Details component.
+ * UMD Libraries Digital Details component.
  *
  */
  #}
@@ -35,66 +35,68 @@
   {% endif %}
 
   {# action area #}
-  {% if actions_heading %}
-    <h2 class="t-title-medium s-margin-heading-medium">{{ actions_heading }}</h2>
-  {% endif %}
+  {% if show_actions %}
+    {% if actions_heading %}
+      <h2 class="t-title-medium s-margin-heading-medium">{{ actions_heading }}</h2>
+    {% endif %}
 
-  <div class="action-area s-margin-general-small">
-    <div class="button-group s-margin-general-small">
-      {% if handle %}
-        <button data-clipboard-text="{{ handle }}" class="button umd-lib clipboardjs-button">Copy Permanent Link</button>
-        <a target="_blank"
-          href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ aeon_collection }}&ReferenceNumber={{ handle }}&CallNumber={{ call_number }}"
-          class="button umd-lib">
-          <span><svg title="new window icon" id="icon_new_window" aria-hidden="true" data-name="new-window-icon" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg"><path class="cls-1" d="M6.67,2.28H1.28S3.63,0,3.63,0h4.49s2.29,0,2.29,0h0s0,2.28,0,2.28h0v4.49s-2.29,2.35-2.29,2.35V3.95S1.55,10.67,1.55,10.67l-1.55-1.55L6.67,2.28Z"></path></svg></span>Request This Item<span class="sr-only">(opens in a new window)</span>
-        </a> 
-      {% endif %}
-      {% if downloadable %}
-        <a class="button umd-lib" role="button" href="{{ downloadable }}">PDF Download</a>
-      {% endif %}
+    <div class="action-area s-margin-general-small">
+      <div class="button-group s-margin-general-small">
+        {% if handle %}
+          <button data-clipboard-text="{{ handle }}" class="button umd-lib clipboardjs-button">Copy Permanent Link</button>
+          <a target="_blank"
+            href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ aeon_collection }}&ReferenceNumber={{ handle }}&CallNumber={{ call_number }}"
+            class="button umd-lib">
+            <span><svg title="new window icon" id="icon_new_window" aria-hidden="true" data-name="new-window-icon" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg"><path class="cls-1" d="M6.67,2.28H1.28S3.63,0,3.63,0h4.49s2.29,0,2.29,0h0s0,2.28,0,2.28h0v4.49s-2.29,2.35-2.29,2.35V3.95S1.55,10.67,1.55,10.67l-1.55-1.55L6.67,2.28Z"></path></svg></span>Request This Item<span class="sr-only">(opens in a new window)</span>
+          </a> 
+        {% endif %}
+        {% if downloadable %}
+          <a class="button umd-lib" role="button" href="{{ downloadable }}">PDF Download</a>
+        {% endif %}
+      </div>
+      <div class="action-messages">
+        <div id="clipboardjs-alert" aria-live="polite"></div>
+        <div id="copy-error" aria-live="polite"></div>
+      </div>
     </div>
-    <div class="action-messages">
-      <div id="clipboardjs-alert" aria-live="polite"></div>
-      <div id="copy-error" aria-live="polite"></div>
-    </div>
-  </div>
+  {% endif %}
 
   {# metadata area #}
   <h2 class="t-title-medium s-margin-heading-medium">{{ metadata_heading }}</h2>
   <dl class="metadata-list s-margin-general-medium">
     {% if title %}
       <div>
-        <dt class="t-title-small c-content-primary">Title</dt>
+        <dt class="t-title-small c-content-primary">{{ title_label|default('Title') }}</dt>
         <dd class="t-body-medium">{{ title }}</dd>
       </div>
     {% endif %}
     {% if description %}
       <div>
-        <dt class="t-title-small c-content-primary">Description</dt>
+        <dt class="t-title-small c-content-primary">{{ description_label|default('Description') }}</dt>
         <dd class="t-body-medium">{{ description }}</dd>
       </div>
     {% endif %}
     {% if date %}
       <div>
-        <dt class="t-title-small c-content-primary">Date</dt>
+        <dt class="t-title-small c-content-primary">{{ date_label|default('Date') }}</dt>
         <dd class="t-body-medium">{{ date }}</dd>
       </div>
     {% endif %}
     {% if location %}
       <div>
-        <dt class="t-title-small c-content-primary">Location</dt>
+        <dt class="t-title-small c-content-primary">{{ location_label|default('Location') }}</dt>
         <dd class="t-body-medium">{{ location }}</dd>
       </div>
     {% endif %}
     {% if subject %}
       <div>
-        <dt class="t-title-small c-content-primary">Subject(s)</dt>
+        <dt class="t-title-small c-content-primary">{{ subject_label|default('Subject(s)') }}</dt>
         <dd class="t-body-medium">{{ subject }}</dd>
       </div>
     {% endif %}
     {% if citation %}
       <div>
-        <dt class="t-title-small c-content-primary">Citation</dt>
+        <dt class="t-title-small c-content-primary">{{ citation_label|default('Citation') }}</dt>
         <dd class="t-body-medium">{{ citation }}</dd>
       </div>
     {% endif %}
@@ -112,43 +114,43 @@
     {% endif %}
     {% if extent %}
       <div>
-        <dt class="t-title-small c-content-primary">Extent</dt>
+        <dt class="t-title-small c-content-primary">{{ extent_label|default('Extent') }}</dt>
         <dd class="t-body-medium">{{ extent }}</dd>
       </div>
     {% endif %}
     {% if creator %}
       <div>
-        <dt class="t-title-small c-content-primary">Creator</dt>
+        <dt class="t-title-small c-content-primary">{{ creator_label|default('Creator') }}</dt>
         <dd class="t-body-medium">{{ creator }}</dd>
       </div>
     {% endif %}
     {% if contributor %}
       <div>
-        <dt class="t-title-small c-content-primary">Contributor(s)</dt>
+        <dt class="t-title-small c-content-primary">{{ contributor_label|default('Contributor(s)') }}</dt>
         <dd class="t-body-medium">{{ contributor }}</dd>
       </div>
     {% endif %}
     {% if publisher %}
       <div>
-        <dt class="t-title-small c-content-primary">Publisher</dt>
+        <dt class="t-title-small c-content-primary">{{ publisher_label|default('Publisher') }}</dt>
         <dd class="t-body-medium">{{ publisher }}</dd>
       </div>
     {% endif %}
     {% if resource_type %}
       <div>
-        <dt class="t-title-small c-content-primary">Resource Type</dt>
+        <dt class="t-title-small c-content-primary">{{ resource_type_label|default('Resource Type') }}</dt>
         <dd class="t-body-medium">{{ resource_type }}</dd>
       </div>
     {% endif %}
     {% if recipient %}
       <div>
-        <dt class="t-title-small c-content-primary">Recipient</dt>
+        <dt class="t-title-small c-content-primary">{{ recipient_label|default('Recipient') }}</dt>
         <dd class="t-body-medium">{{ recipient }}</dd>
       </div>
     {% endif %}
     {% if terms %}
       <div>
-        <dt class="t-title-small c-content-primary">Terms of Use</dt>
+        <dt class="t-title-small c-content-primary">{{ terms_label|default('Terms of Use') }}</dt>
         <dd class="t-body-medium">{{ terms }}</dd>
       </div>
     {% endif %}

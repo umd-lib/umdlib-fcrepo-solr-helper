@@ -30,11 +30,11 @@ class FCRepoTwigExtension extends AbstractExtension {
 
   public function getUrlQuery() {
     $full_uri = \Drupal::request()->getRequestUri();
-    if (!empty($full_uri) && str_contains($full_uri, 'query')) {
+    if (!empty($full_uri) && str_contains($full_uri, 'q=')) {
       $trunc_uri = explode('?', $full_uri);
       parse_str(!empty($trunc_uri[1]) ? $trunc_uri[1] : $full_uri, $uri_array);
       foreach ($uri_array as $key => $value) {
-        if ($key == 'query') {
+        if ($key == 'q') {
           return $value;
         }
       }

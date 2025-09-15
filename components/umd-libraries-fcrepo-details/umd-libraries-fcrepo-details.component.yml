@@ -1,7 +1,7 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 
-name: UMD Lib FCRepo Details
-label: FCRepo Details
+name: UMD Lib Digital Details
+label: Digital Details
 group: UMD Libraries Search
 
 props:
@@ -23,6 +23,10 @@ props:
       type: string
       title: Actions Heading
       description: 'Actions Heading'
+    show_actions:
+      type: boolean
+      title: Show Actions
+      description: Check to show the actions subsection
     iiif_base:
       type: string
       title: IIIF Base URL
@@ -32,6 +36,45 @@ props:
     error_message:
       type: string
       title: IIIF Error message
+    title_label:
+      type: string
+      title: Title Label
+    description_label:
+      type: string
+      title: Description Label
+    extent_label:
+      type: string
+      title: Extent Label
+    date_label:
+      type: string
+      title: Date Label
+    creator_label:
+      type: string
+      title: Creator Label
+    contributor_label:
+      type: string
+      title: Contributor Label
+    location_label:
+      type: string
+      title: Location Label
+    publisher_label:
+      type: string
+      title: Publisher Label
+    subject_label:
+      type: string
+      title: Subject Label
+    citation_label:
+      type: string
+      title: Citation Label
+    resource_type_label:
+      type: string
+      title: Resource Type Label
+    recipient_label:
+      type: string
+      title: Recipient Label
+    terms_label:
+      type: string
+      title: Terms Label
 
 slots:
   handle:
