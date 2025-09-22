@@ -27,6 +27,9 @@ props:
       type: boolean
       title: Show Actions
       description: Check to show the actions subsection
+    show_aeon:
+      type: boolean
+      title: Show Aeon Button
     iiif_base:
       type: string
       title: IIIF Base URL
@@ -75,6 +78,24 @@ props:
     terms_label:
       type: string
       title: Terms Label
+    scpa_collection:
+      type: string
+      title: SCPA Collection
+    field_1_label:
+      type: string
+      title: Undefined field label 1
+    field_2_label:
+      type: string
+      title: Undefined field label 2
+    field_3_label:
+      type: string
+      title: Undefined field label 3
+    field_4_label:
+      type: string
+      title: Undefined field label 4
+    field_5_label:
+      type: string
+      title: Undefined field label 5
 
 slots:
   handle:
@@ -137,6 +158,21 @@ slots:
   call_number:
     title: Identifier / Call number
     description: Record URI for file download
+  field_1:
+    title: Undefined Field 1
+    description: For additional data not included in other fields.
+  field_2:
+    title: Undefined Field 2
+    description: For additional data not included in other fields.
+  field_3:
+    title: Undefined Field 3
+    description: For additional data not included in other fields.
+  field_4:
+    title: Undefined Field 4
+    description: For additional data not included in other fields.
+  field_5:
+    title: Undefined Field 5
+    description: For additional data not included in other fields.
 
 libraryOverrides:
   dependencies:

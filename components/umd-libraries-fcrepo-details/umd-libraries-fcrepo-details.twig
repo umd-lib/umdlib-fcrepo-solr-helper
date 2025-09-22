@@ -44,11 +44,13 @@
       <div class="button-group s-margin-general-small">
         {% if handle %}
           <button data-clipboard-text="{{ handle }}" class="button umd-lib clipboardjs-button">Copy Permanent Link</button>
+        {% endif %}
+        {% if show_aeon %}
           <a target="_blank"
             href="https://aeon.lib.umd.edu/Logon/?Action=10&Form=23&ItemTitle={{ title }}&ItemAuthor={{ creator }}&ItemDate={{ date }}&Site={{ scpa_collection }}&Location={{ aeon_collection }}&ReferenceNumber={{ handle }}&CallNumber={{ call_number }}"
             class="button umd-lib">
             <span><svg title="new window icon" id="icon_new_window" aria-hidden="true" data-name="new-window-icon" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg"><path class="cls-1" d="M6.67,2.28H1.28S3.63,0,3.63,0h4.49s2.29,0,2.29,0h0s0,2.28,0,2.28h0v4.49s-2.29,2.35-2.29,2.35V3.95S1.55,10.67,1.55,10.67l-1.55-1.55L6.67,2.28Z"></path></svg></span>Request This Item<span class="sr-only">(opens in a new window)</span>
-          </a> 
+          </a>
         {% endif %}
         {% if downloadable %}
           <a class="button umd-lib" role="button" href="{{ downloadable }}">PDF Download</a>
@@ -152,6 +154,36 @@
       <div>
         <dt class="t-title-small c-content-primary">{{ terms_label|default('Terms of Use') }}</dt>
         <dd class="t-body-medium">{{ terms }}</dd>
+      </div>
+    {% endif %}
+    {% if field_1 %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ field_1_label }}</dt>
+        <dd class="t-body-medium">{{ field_1 }}</dd>
+      </div>
+    {% endif %}
+    {% if field_2 %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ field_2_label }}</dt>
+        <dd class="t-body-medium">{{ field_2 }}</dd>
+      </div>
+    {% endif %}
+    {% if field_3 %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ field_3_label }}</dt>
+        <dd class="t-body-medium">{{ field_3 }}</dd>
+      </div>
+    {% endif %}
+    {% if field_4 %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ field_4_label }}</dt>
+        <dd class="t-body-medium">{{ field_4 }}</dd>
+      </div>
+    {% endif %}
+    {% if field_5 %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ field_5_label }}</dt>
+        <dd class="t-body-medium">{{ field_5 }}</dd>
       </div>
     {% endif %}
   </dl>
