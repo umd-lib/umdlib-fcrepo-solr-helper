@@ -22,6 +22,8 @@
 
 /* center the text in the link */
 .umd-lib.fcrepo-details .action-area .button-group a {
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 

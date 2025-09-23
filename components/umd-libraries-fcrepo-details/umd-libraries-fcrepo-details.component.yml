@@ -10,19 +10,19 @@ props:
     key:
       type: string
       title: Classes
-      description: 'CSS Classes to add to the component'
+      description: "CSS Classes to add to the component"
     metadata_heading:
       type: string
       title: Metadata Heading
-      description: 'Metadata Heading'
+      description: "Metadata Heading"
     collections_heading:
       type: string
       title: Collections Heading
-      description: 'Collections Heading'
+      description: "Collections Heading"
     actions_heading:
       type: string
       title: Actions Heading
-      description: 'Actions Heading'
+      description: "Actions Heading"
     show_actions:
       type: boolean
       title: Show Actions
@@ -98,6 +98,9 @@ props:
       title: Undefined field label 5
 
 slots:
+  breadcrumb:
+    title: Breadcrumb
+    description: Breadcrumb block slot.
   handle:
     title: Handle
     description: Object handle.
@@ -176,9 +179,9 @@ slots:
 
 libraryOverrides:
   dependencies:
-  - core/drupal
-  - core/once
-  - core/jquery
+    - core/drupal
+    - core/once
+    - core/jquery
   js:
     js/clipboard.min.js: {}
     umd-libraries-fcrepo-details.js: {}

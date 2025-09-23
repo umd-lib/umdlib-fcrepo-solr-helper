@@ -13,10 +13,15 @@
   {% set scpa_collection = 'MDRM' %}
 {% endif %}
 
-<div class="umd-lib digital-collection fcrepo-details {{ classes}}">
+<div class="umd-lib digital-collection fcrepo-details s-box-page-medium-h s-center s-page-lock umd-lib-layout layout--custom {{ classes}} ">
+  {# breadcrumb #}
+  {% if breadcrumb %}
+      {{ breadcrumb }}
+  {% endif %}
+  
   {# page heading #}
   {% if page_heading %}
-    <h1 class="t-title-large s-margin-heading-large">{{ page_heading }}</h1>
+    <h1 class="t-headline s-margin-general-medium">{{ page_heading }}</h1>
   {% endif %}
 
   {# mirador viewer #}
@@ -37,10 +42,10 @@
   {# action area #}
   {% if show_actions %}
     {% if actions_heading %}
-      <h2 class="t-title-medium s-margin-heading-medium">{{ actions_heading }}</h2>
+      <h2 class="t-title-large s-margin-general-medium">{{ actions_heading }}</h2>
     {% endif %}
 
-    <div class="action-area s-margin-general-small">
+    <div class="action-area s-margin-general-medium">
       <div class="button-group s-margin-general-small">
         {% if handle %}
           <button data-clipboard-text="{{ handle }}" class="button umd-lib clipboardjs-button">Copy Permanent Link</button>
@@ -64,7 +69,7 @@
   {% endif %}
 
   {# metadata area #}
-  <h2 class="t-title-medium s-margin-heading-medium">{{ metadata_heading }}</h2>
+  <h2 class="t-title-large s-margin-general-medium">{{ metadata_heading }}</h2>
   <dl class="metadata-list s-margin-general-medium">
     {% if title %}
       <div>
@@ -190,7 +195,7 @@
 
   {# collection area #}
   {% if collection %}
-    <h2 class="t-title-medium s-margin-heading-medium">{{ collections_heading }}</h2>
+    <h2 class="t-title-large s-margin-general-medium">{{ collections_heading }}</h2>
     <dl class="collection-list s-margin-general-medium">
       {{ collection }}
     </dl>
