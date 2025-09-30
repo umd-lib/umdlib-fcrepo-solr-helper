@@ -21,7 +21,7 @@
   
   {# page heading #}
   {% if page_heading %}
-    <h1 class="t-headline s-margin-general-medium">{{ page_heading }}</h1>
+    <h1 class="t-title-large s-margin-general-medium">{{ page_heading }}</h1>
   {% endif %}
 
   {# mirador viewer #}
@@ -42,7 +42,7 @@
   {# action area #}
   {% if show_actions %}
     {% if actions_heading %}
-      <h2 class="t-title-large s-margin-general-medium">{{ actions_heading }}</h2>
+      <h2 class="t-title-medium s-margin-general-medium">{{ actions_heading }}</h2>
     {% endif %}
 
     <div class="action-area s-margin-general-medium">
@@ -69,7 +69,7 @@
   {% endif %}
 
   {# metadata area #}
-  <h2 class="t-title-large s-margin-general-medium">{{ metadata_heading }}</h2>
+  <h2 class="t-title-medium s-margin-general-medium">{{ metadata_heading }}</h2>
   <dl class="metadata-list s-margin-general-medium">
     {% if title %}
       <div>
@@ -195,7 +195,7 @@
 
   {# collection area #}
   {% if collection %}
-    <h2 class="t-title-large s-margin-general-medium">{{ collections_heading }}</h2>
+    <h2 class="t-title-medium s-margin-general-medium">{{ collections_heading }}</h2>
     <dl class="collection-list s-margin-general-medium">
       {{ collection }}
     </dl>
