@@ -33,6 +33,9 @@ props:
     iiif_base:
       type: string
       title: IIIF Base URL
+    restricted_iiif_base:
+      type: string
+      title: Restricted IIIF Base URL
     iiif_prefix:
       type: string
       title: IIIF Prefix
@@ -96,6 +99,10 @@ props:
     field_5_label:
       type: string
       title: Undefined field label 5
+    iiif_restricted_viewer_value:
+      type: string
+      title: Restricted Viewer Value
+      description: If restricted viewer field is set, add a value to look for here.
 
 slots:
   breadcrumb:
@@ -176,12 +183,15 @@ slots:
   field_5:
     title: Undefined Field 5
     description: For additional data not included in other fields.
+  iiif_restricted_viewer_field:
+    title: Restricted Viewer Field
+    description: Check this field for restricted viewer. Set the restricted viewer value property as well.
 
 libraryOverrides:
   dependencies:
-    - core/drupal
-    - core/once
-    - core/jquery
+  - core/drupal
+  - core/once
+  - core/jquery
   js:
     js/clipboard.min.js: {}
     umd-libraries-fcrepo-details.js: {}

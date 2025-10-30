@@ -28,9 +28,15 @@
   {% if iiif_id %}
     {% set query_param = app.request.get('query') %}
     {% set query_param2 = app.request.query.all %}
+    {% set effective_iiif_base = iiif_base %}
+    {% if restricted_iiif_base and iiif_restricted_viewer_field and iiif_restricted_viewer_value %}
+      {% if compare_markup_values(iiif_restricted_viewer_field, iiif_restricted_viewer_value) %}
+        {% set effective_iiif_base = restricted_iiif_base %}
+      {% endif %}
+    {% endif %}
     <iframe class="mirador-viewer s-margin-general-medium"
       title="Mirador Object"
-      src="{{ iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}"
+      src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}"
       scrolling="no"
       allowfullscreen="true"
       webkitallowfullscreen="true"

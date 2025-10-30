@@ -5,6 +5,8 @@ namespace Drupal\umdlib_fcrepo_solr_helper\TwigExtension;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Twig\TwigFilter;
+use Drupal\Core\Render\Markup;
+use Drupal\Component\Render\MarkupInterface;
 
 /**
  * Twig extension providing custom functionalities.
@@ -22,10 +24,35 @@ class FCRepoTwigExtension extends AbstractExtension {
   public function getFunctions() {
     return [
         new TwigFunction('fc_url_query', [
-            $this,
-            'getUrlQuery'
+          $this,
+          'getUrlQuery'
         ]),
+        new TwigFunction('compare_markup_values', [
+          $this,
+          'compareMarkupValues'
+        ])
     ];
+  }
+
+  public function compareMarkupValues($field, $compare) {
+    if ($field instanceof Markup) {
+      $field = $field->__toString();
+    } elseif (is_array($field)) {
+      $field = reset($field);
+      foreach ($field as $k => $v) {
+        if (is_string($v)) {
+          $field = $v;
+          break;
+        }
+      }
+    }
+    if ($compare instanceof Markup) {
+      $compare = $compare->__toString();
+    }
+    if (is_string($field) && is_string($compare)) {
+      return str_contains($field, $compare);
+    }
+    return false;
   }
 
   public function getUrlQuery() {
