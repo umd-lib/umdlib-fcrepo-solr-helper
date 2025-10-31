@@ -81,6 +81,9 @@ props:
     terms_label:
       type: string
       title: Terms Label
+    language_label:
+      type: string
+      title: Language Label
     scpa_collection:
       type: string
       title: SCPA Collection
@@ -168,6 +171,9 @@ slots:
   call_number:
     title: Identifier / Call number
     description: Record URI for file download
+  language:
+    title: Content language
+    description: The language of the record
   field_1:
     title: Undefined Field 1
     description: For additional data not included in other fields.

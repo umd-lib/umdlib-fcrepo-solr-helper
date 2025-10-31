@@ -30,11 +30,22 @@ class FCRepoTwigExtension extends AbstractExtension {
         new TwigFunction('compare_markup_values', [
           $this,
           'compareMarkupValues'
-        ])
+        ]),
     ];
   }
 
   public function compareMarkupValues($field, $compare) {
+    $field = $this->getUIPatternFieldValue($field);
+    if ($compare instanceof Markup) {
+      $compare = $compare->__toString();
+    }
+    if (is_string($field) && is_string($compare)) {
+      return str_contains($field, $compare);
+    }
+    return false;
+  }
+
+  protected function getUIPatternFieldValue($field) {
     if ($field instanceof Markup) {
       $field = $field->__toString();
     } elseif (is_array($field)) {
@@ -46,13 +57,7 @@ class FCRepoTwigExtension extends AbstractExtension {
         }
       }
     }
-    if ($compare instanceof Markup) {
-      $compare = $compare->__toString();
-    }
-    if (is_string($field) && is_string($compare)) {
-      return str_contains($field, $compare);
-    }
-    return false;
+    return $field;
   }
 
   public function getUrlQuery() {
@@ -72,10 +77,50 @@ class FCRepoTwigExtension extends AbstractExtension {
   public function getFilters() {
     return [
       new TwigFilter(
-        'landing_page',
-        [$this, 'getCollectionLandingPage']
-      ),
+        'landing_page', [
+        $this,
+        'getCollectionLandingPage'
+      ]),
+      new TwigFilter(
+        'fcrepo_language_title', [
+        $this,
+        'fcrepoLanguageTitle'
+        ])
     ];
+  }
+
+  public function fcrepoLanguageTags($field) {
+    $field = $this->getUIPatternFieldValue($field);
+
+    $result = [];
+    if (is_string($field)) {
+      if (!str_contains($field, '[@ja]')) {
+        return $field;
+      }
+      $field_parts = explode(", ", $field);
+      foreach ($field_parts as $part) {
+        $lang_parts = explode("]", $part);
+        if (is_array($lang_parts) && count($lang_parts) > 0) {
+          $key = str_replace("[@", '', $lang_parts[0]);
+          $result[$key] = $lang_parts[1];
+        }
+      }
+      return $result;
+    }
+    return $field;
+  }
+
+  public function fcrepoLanguageTitle($field) {
+    $field = $this->getUIPatternFieldValue($field);
+    $tags = $this->fcrepoLanguageTags($field);
+    if (is_string($tags)) {
+      return $tags;
+    } elseif (!empty($tags['ja']) && !empty($tags['ja-Latn'])) {
+      // This assumes ja and ja-Latn. If we ever add more languages
+      // we will need a dynamic loop
+      $field = $tags['ja'] . ' (' . $tags['ja-Latn'] . ')'; 
+    }
+    return $field;
   }
 
   public function getCollectionLandingPage(string $collection) {
