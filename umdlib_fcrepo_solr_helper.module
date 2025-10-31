@@ -39,6 +39,13 @@ function umdlib_fcrepo_solr_helper_views_post_render($view) {
 
   if (!empty($d_title) && !empty($d_title[0])) {
     $new_title = $d_title[0];
+    if (str_contains($new_title, '[@ja]')) {
+      $new_title = str_replace('[@ja]', '', $new_title);
+      if (!empty($d_title[1]) && str_contains($d_title[1], '[@ja-Latn]')) {
+        $trans = str_replace('[@ja-Latn]', '', $d_title[1]);
+        $new_title .= " ($trans)";
+      }
+    }
     $view->setTitle($new_title);
     $route = \Drupal::routeMatch()->getCurrentRouteMatch()->getRouteObject();
     $route->setDefault('_title_callback', function() use ($new_title) {
