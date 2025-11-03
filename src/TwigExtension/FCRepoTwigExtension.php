@@ -85,6 +85,11 @@ class FCRepoTwigExtension extends AbstractExtension {
         'fcrepo_language_title', [
         $this,
         'fcrepoLanguageTitle'
+        ]),
+      new TwigFilter(
+        'fcrepo_language_title_metadata', [
+        $this,
+        'fcrepoLanguageTitleMetadata'
         ])
     ];
   }
@@ -118,7 +123,20 @@ class FCRepoTwigExtension extends AbstractExtension {
     } elseif (!empty($tags['ja']) && !empty($tags['ja-Latn'])) {
       // This assumes ja and ja-Latn. If we ever add more languages
       // we will need a dynamic loop
-      $field = $tags['ja'] . ' (' . $tags['ja-Latn'] . ')'; 
+      $field = $tags['ja'] . ' <span style="font-weight: 400;">(' . $tags['ja-Latn'] . ')</span>'; 
+    }
+    return $field;
+  }
+
+  public function fcrepoLanguageTitleMetadata($field) {
+    $field = $this->getUIPatternFieldValue($field);
+    $tags = $this->fcrepoLanguageTags($field);
+    if (is_string($tags)) {
+      return $tags;
+    } elseif (!empty($tags['ja']) && !empty($tags['ja-Latn'])) {
+      // This assumes ja and ja-Latn. If we ever add more languages
+      // we will need a dynamic loop
+      $field = '<span class="t-bold">' . $tags['ja'] . '</span> (' . $tags['ja-Latn'] . ')'; 
     }
     return $field;
   }

@@ -21,7 +21,11 @@
   
   {# page heading #}
   {% if page_heading %}
-    <h1 class="t-title-large s-margin-general-medium">{{ page_heading|fcrepo_language_title }}</h1>
+    <h1 class="t-title-large s-margin-general-medium">
+      {% autoescape %}
+        {{ page_heading|fcrepo_language_title|raw }}</dd>
+      {% endautoescape %}
+    </h1>
   {% endif %}
 
   {# mirador viewer #}
@@ -80,7 +84,10 @@
     {% if title %}
       <div>
         <dt class="t-title-small c-content-primary">{{ title_label|default('Title') }}</dt>
-        <dd class="t-body-medium">{{ title|fcrepo_language_title }}</dd>
+        <dd class="t-body-medium">
+          {% autoescape %}
+            {{ title|fcrepo_language_title_metadata|raw }}</dd>
+          {% endautoescape %}
       </div>
     {% endif %}
     {% if description %}
