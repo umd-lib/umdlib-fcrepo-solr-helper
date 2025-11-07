@@ -23,13 +23,6 @@ props:
       type: string
       title: Actions Heading
       description: "Actions Heading"
-    show_actions:
-      type: boolean
-      title: Show Actions
-      description: Check to show the actions subsection
-    show_aeon:
-      type: boolean
-      title: Show Aeon Button
     iiif_base:
       type: string
       title: IIIF Base URL
@@ -48,6 +41,12 @@ props:
     description_label:
       type: string
       title: Description Label
+    downloadable_label:
+      type: string
+      title: Downloadable Label
+    configurable_button_label:
+      type: string
+      title: Configurable Button Label
     extent_label:
       type: string
       title: Extent Label
@@ -159,6 +158,10 @@ slots:
   aeon_collection:
     title: Aeon Collection
     description: Collection string for Aeon link
+  aeon_url:
+    type: string
+    title: Aeon URL
+    description: fully formed URL string for Aeon link
   terms:
     title: Terms of use
     description: Object terms
@@ -168,6 +171,9 @@ slots:
   downloadable:
     title: Download URI
     description: Record URI for file download
+  configurable_button:
+    title: Configurable Button URI
+    description: Additional button if necessary
   call_number:
     title: Identifier / Call number
     description: Record URI for file download
