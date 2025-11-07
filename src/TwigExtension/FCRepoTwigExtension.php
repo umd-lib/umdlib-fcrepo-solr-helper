@@ -34,18 +34,23 @@ class FCRepoTwigExtension extends AbstractExtension {
     ];
   }
 
-  public function compareMarkupValues($field, $compare) {
+  public function compareMarkupValues($field, $compare, $fuzzy = true) {
     $field = $this->getUIPatternFieldValue($field);
     if ($compare instanceof Markup) {
       $compare = $compare->__toString();
     }
     if (is_string($field) && is_string($compare)) {
-      return str_contains($field, $compare);
+      if ($fuzzy) {
+        return str_contains(strtolower($field), strtolower($compare));
+      }
+      return strtolower($field) == strtolower($compare);
     }
     return false;
   }
 
   protected function getUIPatternFieldValue($field) {
+    // At this point, Views would have already formatted the value
+    // into a string. We just need to dig it out of the render array.
     if ($field instanceof Markup) {
       $field = $field->__toString();
     } elseif (is_array($field)) {
