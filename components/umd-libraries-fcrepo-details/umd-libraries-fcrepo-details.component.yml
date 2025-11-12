@@ -15,10 +15,43 @@ props:
       type: string
       title: Metadata Heading
       description: "Metadata Heading"
+    call_number_label:
+      type: string
+      title: Call Number Label
+    citation_label:
+      type: string
+      title: Citation Label
     collections_heading:
       type: string
       title: Collections Heading
       description: "Collections Heading"
+    contributor_label:
+      type: string
+      title: Contributor Label
+    creator_label:
+      type: string
+      title: Creator Label
+    date_label:
+      type: string
+      title: Date Label
+    description_label:
+      type: string
+      title: Description Label
+    extent_label:
+      type: string
+      title: Extent Label
+    handle_label:
+      type: string
+      title: Handle Label
+    language_label:
+      type: string
+      title: Language Label
+    location_label:
+      type: string
+      title: Location Label
+    publisher_label:
+      type: string
+      title: Publisher Label
     actions_heading:
       type: string
       title: Actions Heading
@@ -38,39 +71,15 @@ props:
     title_label:
       type: string
       title: Title Label
-    description_label:
-      type: string
-      title: Description Label
     downloadable_label:
       type: string
       title: Downloadable Label
     configurable_button_label:
       type: string
       title: Configurable Button Label
-    extent_label:
-      type: string
-      title: Extent Label
-    date_label:
-      type: string
-      title: Date Label
-    creator_label:
-      type: string
-      title: Creator Label
-    contributor_label:
-      type: string
-      title: Contributor Label
-    location_label:
-      type: string
-      title: Location Label
-    publisher_label:
-      type: string
-      title: Publisher Label
     subject_label:
       type: string
       title: Subject Label
-    citation_label:
-      type: string
-      title: Citation Label
     resource_type_label:
       type: string
       title: Resource Type Label
@@ -80,9 +89,6 @@ props:
     terms_label:
       type: string
       title: Terms Label
-    language_label:
-      type: string
-      title: Language Label
     scpa_collection:
       type: string
       title: SCPA Collection
@@ -110,51 +116,57 @@ slots:
   breadcrumb:
     title: Breadcrumb
     description: Breadcrumb block slot.
-  handle:
-    title: Handle
-    description: Object handle.
   page_heading:
     title: Page Heading
     description: Page heading, such as object title.
-  title:
-    title: Title
-    description: Object title.
+  call_number:
+    title: Identifier / Call number
+    description: Record URI for file download
+  citation:
+    title: Citation
+    description: Object citation.
+  collection:
+    title: Collection(s)
+    description: Object collection(s) with links
+  contributor:
+    title: Contributor
+    description: Object contributor(s).
+  creator:
+    title: Creator
+    description: Object creator(s).
+  date:
+    title: Date
+    description: Object date.
   description:
     title: Description
     description: Object description.
   extent:
     title: Extent
     description: Object extent.
-  date:
-    title: Date
-    description: Object date.
-  creator:
-    title: Creator
-    description: Object creator(s).
-  contributor:
-    title: Contributor
-    description: Object contributor(s).
+  handle:
+    title: Handle
+    description: Object handle.
+  language:
+    title: Content language
+    description: The language of the record
   location:
     title: Location
     description: Object location.
   publisher:
     title: Publisher
     description: Object publisher.
-  subject:
-    title: Subject
-    description: Object subject.
-  citation:
-    title: Citation
-    description: Object citation.
   resource_type:
     title: Resourse Type
     description: Object resource type
-  recipient:
-    title: Recipient
-    description: Object recipient
-  collection:
-    title: Collection(s)
-    description: Object collection(s) with links
+  subject:
+    title: Subject
+    description: Object subject.
+  terms:
+    title: Terms of use
+    description: Object terms
+  title:
+    title: Title
+    description: Object title.
   aeon_collection:
     title: Aeon Collection
     description: Collection string for Aeon link
@@ -162,9 +174,6 @@ slots:
     type: string
     title: Aeon URL
     description: fully formed URL string for Aeon link
-  terms:
-    title: Terms of use
-    description: Object terms
   iiif_id:
     title: IIIF ID
     description: IIIF ID used for Mirador
@@ -174,12 +183,6 @@ slots:
   configurable_button:
     title: Configurable Button URI
     description: Additional button if necessary
-  call_number:
-    title: Identifier / Call number
-    description: Record URI for file download
-  language:
-    title: Content language
-    description: The language of the record
   field_1:
     title: Undefined Field 1
     description: For additional data not included in other fields.

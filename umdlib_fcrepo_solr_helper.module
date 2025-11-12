@@ -15,11 +15,11 @@ function umdlib_fcrepo_solr_helper_views_post_render($view) {
     $field_name = 'title';
   }
 
-  if ($view->id() == 'plant_patents_detail' && count($view->result) > 0) {
+  if ($view->id() == 'plant_patents_details' && count($view->result) > 0) {
     $field_name = 'display_title';
   }
 
-  if ($view->id() == 'maryland_maps_detail' && count($view->result) > 0) {
+  if ($view->id() == 'mdmap_details' && count($view->result) > 0) {
     $field_name = 'title';
   }
 

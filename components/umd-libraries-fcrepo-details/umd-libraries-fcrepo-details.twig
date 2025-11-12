@@ -97,34 +97,10 @@
           {% endautoescape %}
       </div>
     {% endif %}
-    {% if description %}
+    {% if call_number %}
       <div>
-        <dt class="t-title-small c-content-primary">{{ description_label|default('Description') }}</dt>
-        <dd class="t-body-medium">{{ description }}</dd>
-      </div>
-    {% endif %}
-    {% if date %}
-      <div>
-        <dt class="t-title-small c-content-primary">{{ date_label|default('Date') }}</dt>
-        <dd class="t-body-medium">{{ date }}</dd>
-      </div>
-    {% endif %}
-    {% if location %}
-      <div>
-        <dt class="t-title-small c-content-primary">{{ location_label|default('Location') }}</dt>
-        <dd class="t-body-medium">{{ location }}</dd>
-      </div>
-    {% endif %}
-    {% if subject %}
-      <div>
-        <dt class="t-title-small c-content-primary">{{ subject_label|default('Subject(s)') }}</dt>
-        <dd class="t-body-medium">{{ subject }}</dd>
-      </div>
-    {% endif %}
-    {% if language %}
-      <div>
-        <dt class="t-title-small c-content-primary">{{ language_label|default('Language') }}</dt>
-        <dd class="t-body-medium">{{ language }}</dd>
+        <dt class="t-title-small c-content-primary">{{ call_number_label|default('Call Number') }}</dt>
+        <dd class="t-body-medium">{{ call_number }}</dd>
       </div>
     {% endif %}
     {% if citation %}
@@ -133,22 +109,10 @@
         <dd class="t-body-medium">{{ citation }}</dd>
       </div>
     {% endif %}
-    {% if handle %}
+    {% if contributor %}
       <div>
-        <dt class="t-title-small c-content-primary">Permanent Link</dt>
-        <dd class="t-body-medium">https://hdl.handle.net/{{ handle }}</dd>
-      </div>
-    {% endif %}
-    {% if rights %}
-      <div>
-        <dt class="t-title-small c-content-primary">Rights</dt>
-        <dd class="t-body-medium">{{ rights }}</dd>
-      </div>
-    {% endif %}
-    {% if extent %}
-      <div>
-        <dt class="t-title-small c-content-primary">{{ extent_label|default('Extent') }}</dt>
-        <dd class="t-body-medium">{{ extent }}</dd>
+        <dt class="t-title-small c-content-primary">{{ contributor_label|default('Contributor(s)') }}</dt>
+        <dd class="t-body-medium">{{ contributor }}</dd>
       </div>
     {% endif %}
     {% if creator %}
@@ -157,10 +121,40 @@
         <dd class="t-body-medium">{{ creator }}</dd>
       </div>
     {% endif %}
-    {% if contributor %}
+    {% if date %}
       <div>
-        <dt class="t-title-small c-content-primary">{{ contributor_label|default('Contributor(s)') }}</dt>
-        <dd class="t-body-medium">{{ contributor }}</dd>
+        <dt class="t-title-small c-content-primary">{{ date_label|default('Date') }}</dt>
+        <dd class="t-body-medium">{{ date }}</dd>
+      </div>
+    {% endif %}
+    {% if description %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ description_label|default('Description') }}</dt>
+        <dd class="t-body-medium">{{ description }}</dd>
+      </div>
+    {% endif %}
+    {% if extent %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ extent_label|default('Extent') }}</dt>
+        <dd class="t-body-medium">{{ extent }}</dd>
+      </div>
+    {% endif %}
+    {% if handle %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ handle_label|default('Permanent Link') }}</dt>
+        <dd class="t-body-medium">https://hdl.handle.net/{{ handle }}</dd>
+      </div>
+    {% endif %}
+    {% if language %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ language_label|default('Language') }}</dt>
+        <dd class="t-body-medium">{{ language }}</dd>
+      </div>
+    {% endif %}
+    {% if location %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ location_label|default('Location') }}</dt>
+        <dd class="t-body-medium">{{ location }}</dd>
       </div>
     {% endif %}
     {% if publisher %}
@@ -169,16 +163,28 @@
         <dd class="t-body-medium">{{ publisher }}</dd>
       </div>
     {% endif %}
+    {% if recipient %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ recipient_label|default('Recipient') }}</dt>
+        <dd class="t-body-medium">{{ recipient }}</dd>
+      </div>
+    {% endif %}
     {% if resource_type %}
       <div>
         <dt class="t-title-small c-content-primary">{{ resource_type_label|default('Resource Type') }}</dt>
         <dd class="t-body-medium">{{ resource_type }}</dd>
       </div>
     {% endif %}
-    {% if recipient %}
+    {% if rights %}
       <div>
-        <dt class="t-title-small c-content-primary">{{ recipient_label|default('Recipient') }}</dt>
-        <dd class="t-body-medium">{{ recipient }}</dd>
+        <dt class="t-title-small c-content-primary">Rights</dt>
+        <dd class="t-body-medium">{{ rights }}</dd>
+      </div>
+    {% endif %}
+    {% if subject %}
+      <div>
+        <dt class="t-title-small c-content-primary">{{ subject_label|default('Subject(s)') }}</dt>
+        <dd class="t-body-medium">{{ subject }}</dd>
       </div>
     {% endif %}
     {% if terms %}
