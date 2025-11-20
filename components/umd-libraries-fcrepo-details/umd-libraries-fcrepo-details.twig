@@ -40,7 +40,7 @@
     {% endif %}
     <iframe class="mirador-viewer s-margin-general-medium"
       title="Mirador Object"
-      src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}"
+      src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}&page={{ get_page_number() }}"
       scrolling="no"
       allowfullscreen="true"
       webkitallowfullscreen="true"

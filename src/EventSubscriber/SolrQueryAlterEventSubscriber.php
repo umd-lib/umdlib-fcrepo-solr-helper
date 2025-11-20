@@ -30,6 +30,7 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public function postExtractResults(PostExtractResultsEvent $event): void {
+    return;
     $query = $event->getSearchApiQuery();
 
     $search_index = $query->getIndex();
@@ -38,59 +39,69 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     }
 
     $server_id = $search_index->getServerId();
+    dsm($server_id);
     if ($server_id != "fcrepo") {
       return;
     }
 
-    $results = $event->getSolariumResult();
-    $results = $event->getSearchApiResultSet();
-    if ($results->getResultCount() < 1) {
+    // $sol_results = $event->getSolariumResult();
+    $sapi_results = $event->getSearchApiResultSet();
+    if ($sapi_results->getResultCount() < 1) {
       return;
     }
 
+    // $index_id = $search_index->id();
+    // dsm($index_id);
+    // if ($index_id == 'searcher') {
+    //   $result_items = $sapi_results->getResultItems();
+    //   foreach ($result_items as $key => $item) {
+    //     dsm($item);
+    //     break;
+    //   }
+    // }
 
-    if ($index_id == 'searcher') {
-    }
 
-    if (!empty($search_index)) {
-      $index_id = $search_index->id();
-      if (!str_contains($index_id, "_nested")) {
-        return;
-      }
-    }
+    // dsm($sapi_results);
+
+    // if (!empty($search_index)) {
+    //   $index_id = $search_index->id();
+    //   if (!str_contains($index_id, "_nested")) {
+    //     return;
+    //   }
+    // }
     // If an index contains _nested, we process nested fields.
 
-    $result_items = $results->getResultItems();
-    foreach ($result_items as $key => $item) {
-      $extra = $item->getExtraData('search_api_solr_document');
-      // dsm($extra);
-      if (!empty($extra)) {
-        $object__rights_holder = $extra->__get('object__rights_holder');
-        if (!empty($object__rights_holder)) {
+    // $result_items = $results->getResultItems();
+    // foreach ($result_items as $key => $item) {
+    //   $extra = $item->getExtraData('search_api_solr_document');
+    //   // dsm($extra);
+    //   if (!empty($extra)) {
+    //     $object__rights_holder = $extra->__get('object__rights_holder');
+    //     if (!empty($object__rights_holder)) {
 
-        }
-        $object__subjects = $extra->__get('object__subject');
-        dsm($object__subjects);
-        if (!empty($object__subjects)) {
+    //     }
+    //     $object__subjects = $extra->__get('object__subject');
+    //     dsm($object__subjects);
+    //     if (!empty($object__subjects)) {
 
-        }
-        $object__has_member = $extra->__get('object__has_member');
-        dsm($object__has_member);
-        if (!empty($object__has_member)) {
+    //     }
+    //     $object__has_member = $extra->__get('object__has_member');
+    //     dsm($object__has_member);
+    //     if (!empty($object__has_member)) {
 
-        }
-        $item__rights_holder = $extra->__get('item__rights_holder');
-        if (!empty($item__rights_holder)) {
+    //     }
+    //     $item__rights_holder = $extra->__get('item__rights_holder');
+    //     if (!empty($item__rights_holder)) {
 
-        }
-        $object__location = $extra->__get('object__location');
-        if (!empty($object__location)) {
+    //     }
+    //     $object__location = $extra->__get('object__location');
+    //     if (!empty($object__location)) {
 
-        }
-        $object__has_file = $extra->__get('object__has_file');
-        if (!empty($object__has_file)) {
+    //     }
+    //     $object__has_file = $extra->__get('object__has_file');
+    //     if (!empty($object__has_file)) {
           
-        }
+    //     }
         // if (!empty($files['docs'])) {
         //   foreach ($files['docs'] as $f_doc) {
         //     if (!empty($f_doc['mime_type']) && $f_doc['mime_type'] == 'application/pdf') {
@@ -98,12 +109,12 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
         //     }
         //   }
         // }
-      }
+      // }
       // $pcdm_files = $item->getField('pcdm_files');
       // if (!empty($pcdm_files)) {
       //    $pcdm_files->setValues($new_files_array);
       // }
-    }
+    // }
     // $results->setResultItems($result_items);
   }
 

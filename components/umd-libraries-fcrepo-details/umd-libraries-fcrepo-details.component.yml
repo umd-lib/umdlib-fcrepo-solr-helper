@@ -15,43 +15,56 @@ props:
       type: string
       title: Metadata Heading
       description: "Metadata Heading"
-    call_number_label:
-      type: string
-      title: Call Number Label
-    citation_label:
-      type: string
-      title: Citation Label
     collections_heading:
       type: string
       title: Collections Heading
       description: "Collections Heading"
-    contributor_label:
-      type: string
-      title: Contributor Label
-    creator_label:
-      type: string
-      title: Creator Label
-    date_label:
-      type: string
-      title: Date Label
-    description_label:
-      type: string
-      title: Description Label
-    extent_label:
-      type: string
-      title: Extent Label
     handle_label:
       type: string
       title: Handle Label
     language_label:
       type: string
       title: Language Label
+    call_number_label:
+      type: string
+      title: Field One Label (Call Number)
+      description: Intended for Call Number
+    citation_label:
+      type: string
+      title: Field Two Label (Citation)
+      description: Intended for Citation
+    contributor_label:
+      type: string
+      title: Field Three Label (Contributor)
+      description: Intended for Contributor
+    creator_label:
+      type: string
+      title: Field Four Label (Creator)
+      description: Intended for Creator
+    date_label:
+      type: string
+      title: Field Five Label (Date)
+      description: Intended for Date
+    description_label:
+      type: string
+      title: Field Six Label (Description)
+      description: Intended for Description
+    extent_label:
+      type: string
+      title: Field Seven Label (Extent)
+      description: Intended for Extent
     location_label:
       type: string
-      title: Location Label
+      title: Field Eight Label (Location)
+      description: Intended for Location
     publisher_label:
       type: string
-      title: Publisher Label
+      title: Field Nine Label (Publisher)
+      description: Intended for Publisher
+    resource_type_label:
+      type: string
+      title: Field Ten (Resource Type)
+      description: Intended for Resource Type
     actions_heading:
       type: string
       title: Actions Heading
@@ -80,9 +93,6 @@ props:
     subject_label:
       type: string
       title: Subject Label
-    resource_type_label:
-      type: string
-      title: Resource Type Label
     recipient_label:
       type: string
       title: Recipient Label
@@ -119,45 +129,45 @@ slots:
   page_heading:
     title: Page Heading
     description: Page heading, such as object title.
-  call_number:
-    title: Identifier / Call number
-    description: Record URI for file download
-  citation:
-    title: Citation
-    description: Object citation.
   collection:
     title: Collection(s)
     description: Object collection(s) with links
-  contributor:
-    title: Contributor
-    description: Object contributor(s).
-  creator:
-    title: Creator
-    description: Object creator(s).
-  date:
-    title: Date
-    description: Object date.
-  description:
-    title: Description
-    description: Object description.
-  extent:
-    title: Extent
-    description: Object extent.
   handle:
     title: Handle
     description: Object handle.
   language:
     title: Content language
     description: The language of the record
+  call_number:
+    title: Field One (Call Number)
+    description: Intended for Call Number
+  citation:
+    title: Field Two (Citation)
+    description: Intended for Citation
+  contributor:
+    title: Field Three (Contributor)
+    description: Intended for Contributor(s)
+  creator:
+    title: Field Four (Creator)
+    description: Intended for Creator(s)
+  date:
+    title: Field Five (Date)
+    description: Intended for Date
+  description:
+    title: Field Six (Description)
+    description: Intended for Description
+  extent:
+    title: Field Seven (Extent)
+    description: Intended for Extent
   location:
-    title: Location
-    description: Object location.
+    title: Field Eight (Location)
+    description: Intended for Location
   publisher:
-    title: Publisher
-    description: Object publisher.
+    title: Field Nine (Publisher)
+    description: Intended for Publisher
   resource_type:
-    title: Resourse Type
-    description: Object resource type
+    title: Field Ten (Resource Type)
+    description: Intended for Resource Type
   subject:
     title: Subject
     description: Object subject.

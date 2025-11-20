@@ -27,6 +27,10 @@ class FCRepoTwigExtension extends AbstractExtension {
           $this,
           'getUrlQuery'
         ]),
+        new TwigFunction('get_page_number', [
+          $this,
+          'getPageNumber'
+        ]),
         new TwigFunction('compare_markup_values', [
           $this,
           'compareMarkupValues'
@@ -65,13 +69,21 @@ class FCRepoTwigExtension extends AbstractExtension {
     return $field;
   }
 
+  public function getPageNumber() {
+    return $this->getQueryParameter('page');
+  }
+
   public function getUrlQuery() {
+    return $this->getQueryParameter('q');
+  }
+
+  protected function getQueryParameter($param) {
     $full_uri = \Drupal::request()->getRequestUri();
-    if (!empty($full_uri) && str_contains($full_uri, 'q=')) {
+    if (!empty($full_uri) && str_contains($full_uri, $param . '=')) {
       $trunc_uri = explode('?', $full_uri);
       parse_str(!empty($trunc_uri[1]) ? $trunc_uri[1] : $full_uri, $uri_array);
       foreach ($uri_array as $key => $value) {
-        if ($key == 'q') {
+        if ($key == $param) {
           return $value;
         }
       }
