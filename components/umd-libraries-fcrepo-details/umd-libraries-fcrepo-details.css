@@ -3,9 +3,42 @@
   flex-direction: column;
 }
 
-.umd-lib.fcrepo-details iframe.mirador-viewer {
+.umd-lib.fcrepo-details .mirador-viewer--container iframe.mirador-viewer {
   width: 100%;
   aspect-ratio: 3/4;
+}
+
+/* mirador viewer loading animation */
+.umd-lib.fcrepo-details .mirador-viewer--container {
+  position: relative;
+}
+
+.umd-lib.fcrepo-details
+  .mirador-viewer--container
+  iframe.mirador-viewer.is-loading {
+  border-radius: 16px;
+}
+
+.umd-lib.fcrepo-details
+  .mirador-viewer--container
+  .mirador-viewer-loading-animation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  background: linear-gradient(
+    135deg,
+    var(--light-gray) 0%,
+    var(--lighter-gray) 50%,
+    var(--light-gray) 100%
+  );
+  background-size: 200% 100%;
+
+  animation: loading 1.5s infinite;
+
+  border-radius: 8px;
 }
 
 .umd-lib.fcrepo-details .action-area .button-group {

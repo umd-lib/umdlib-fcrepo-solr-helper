@@ -23,7 +23,7 @@
   {% if page_heading %}
     <h1 class="t-title-large s-margin-general-medium">
       {% autoescape %}
-        {{ page_heading|fcrepo_language_title|raw }}</dd>
+        {{ page_heading|fcrepo_language_title|raw }}
       {% endautoescape %}
     </h1>
   {% endif %}
@@ -38,15 +38,20 @@
         {% set effective_iiif_base = restricted_iiif_base %}
       {% endif %}
     {% endif %}
-    <iframe class="mirador-viewer s-margin-general-medium"
-      title="Mirador Object"
-      src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}&page={{ get_page_number() }}"
-      scrolling="no"
-      allowfullscreen="true"
-      webkitallowfullscreen="true"
-      mozallowfullscreen="true">
-        {{ error_message }}
-    </iframe>
+    <div class="mirador-viewer--container s-margin-general-medium">
+      <iframe class="mirador-viewer is-loading"
+        id="iiif-mirador-viewer"
+        title="Mirador Object"
+        src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}&page={{ get_page_number() }}"
+        scrolling="no"
+        allowfullscreen="true"
+        webkitallowfullscreen="true"
+        mozallowfullscreen="true">
+          {{ error_message }}
+      </iframe>
+      <div class="mirador-viewer-loading-animation" id="mirador-loading-animation" aria-hidden="true">
+      </div>
+    </div>
   {% endif %}
 
   {# action area #}
@@ -93,8 +98,9 @@
         <dt class="t-title-small c-content-primary">{{ title_label|default('Title') }}</dt>
         <dd class="t-body-medium">
           {% autoescape %}
-            {{ title|fcrepo_language_title_metadata|raw }}</dd>
+            {{ title|fcrepo_language_title_metadata|raw }}
           {% endautoescape %}
+        </dd>
       </div>
     {% endif %}
     {% if call_number %}

@@ -5,7 +5,7 @@ window.ClipboardJS = window.ClipboardJS || Clipboard;
   Drupal.behaviors.clipboardjs = {
     attach: function (context, settings) {
       let elements = context.querySelectorAll(
-        "a.clipboardjs-button, input.clipboardjs-button, button.clipboardjs-button"
+        "a.clipboardjs-button, input.clipboardjs-button, button.clipboardjs-button",
       );
       let alert_id = document.getElementById("clipboardjs-alert");
       let error_id = document.getElementById("copy-error");
@@ -63,7 +63,7 @@ window.ClipboardJS = window.ClipboardJS || Clipboard;
 
         if (/iPhone|iPad/i.test(navigator.userAgent)) {
           actionMsg = Drupal.t(
-            "This device does not support HTML5 Clipboard Copying. Please copy manually."
+            "This device does not support HTML5 Clipboard Copying. Please copy manually.",
           );
         } else {
           if (/Mac/i.test(navigator.userAgent)) {
@@ -125,3 +125,16 @@ window.ClipboardJS = window.ClipboardJS || Clipboard;
     },
   };
 })(jQuery, Drupal, once);
+
+// loading animation for iiif mirador viewer
+document.addEventListener("DOMContentLoaded", function () {
+  const iframe = document.getElementById("iiif-mirador-viewer");
+  const loader = document.getElementById("mirador-loading-animation");
+
+  if (iframe && loader) {
+    iframe.addEventListener("load", () => {
+      iframe.classList.remove("is-loading");
+      loader.classList.add("hidden");
+    });
+  }
+});
