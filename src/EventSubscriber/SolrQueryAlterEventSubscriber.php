@@ -39,12 +39,10 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     }
 
     $server_id = $search_index->getServerId();
-    dsm($server_id);
     if ($server_id != "fcrepo") {
       return;
     }
 
-    // $sol_results = $event->getSolariumResult();
     $sapi_results = $event->getSearchApiResultSet();
     if ($sapi_results->getResultCount() < 1) {
       return;
@@ -118,7 +116,7 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     // $results->setResultItems($result_items);
   }
 
-    /**
+  /**
    * {@inheritdoc}
    */
   public function preQuery(PreQueryEvent $event): void {
@@ -141,6 +139,7 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
       $query->createFilterQuery('discoverable_filter')->setQuery('is_discoverable:true');
       // $query->createFilterQuery('whca_filter')->setQuery('-adminset__title__display:WHCA Pool Reports');
     }
+    return;
 
     $index_id = $search_index->id();
     if (!str_contains($index_id, "_nested")) {
