@@ -1,0 +1,15 @@
+{
+    "name": "umd-lib/umdlib_fcrepo_solr_helper",
+    "description": "Solr helper module for UMD Digital. Contains Single Directory Component for Digital details display.",
+    "type": "drupal-module",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "UMD Libraries"
+        }
+    ],
+    "require": {
+        "drupal/ui_patterns": "2.0.x-dev@dev"
+      },
+    "minimum-stability": "beta"
+}
