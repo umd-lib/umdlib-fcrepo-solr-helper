@@ -4,6 +4,7 @@ namespace Drupal\umdlib_fcrepo_solr_helper\EventSubscriber;
 
 use Drupal\search_api_solr\Event\PreQueryEvent;
 use Drupal\search_api_solr\Event\PostExtractResultsEvent;
+use Drupal\search_api_solr\Event\PostConvertedQueryEvent;
 use Drupal\search_api_solr\Event\SearchApiSolrEvents;
 use Drupal\search_api\Item\FieldInterface;
 use Drupal\search_api\Query\QueryInterface as SapiQueryInterface;
@@ -23,6 +24,7 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     return [
       SearchApiSolrEvents::POST_EXTRACT_RESULTS => 'postExtractResults',
       SearchApiSolrEvents::PRE_QUERY => 'preQuery',
+      SearchApiSolrEvents::POST_CONVERT_QUERY => 'postQuery',
     ];
   }
 
@@ -114,6 +116,11 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
       // }
     // }
     // $results->setResultItems($result_items);
+  }
+
+  public function postQuery(PostConvertedQueryEvent $event): void {
+    $query = $event->getSolariumQuery();
+    dsm($query);
   }
 
   /**
