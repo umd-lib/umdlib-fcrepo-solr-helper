@@ -10,6 +10,7 @@ use Drupal\search_api\Item\FieldInterface;
 use Drupal\search_api\Query\QueryInterface as SapiQueryInterface;
 use Solarium\Core\Query\QueryInterface as SolariumQueryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\search_api\Item\Field;
 
 /**
  * Alters the query where necessary to implement business logic.
@@ -32,8 +33,11 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public function postExtractResults(PostExtractResultsEvent $event): void {
-    return;
     $query = $event->getSearchApiQuery();
+    // dsm($query);
+    // $query = $event->getSolariumQuery();
+    // dsm($query);
+    return;
 
     $search_index = $query->getIndex();
     if (empty($search_index)) {
@@ -120,7 +124,8 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
 
   public function postQuery(PostConvertedQueryEvent $event): void {
     $query = $event->getSolariumQuery();
-    dsm($query);
+    // dsm($query);
+    $search_query = $event->getSearchApiQuery();
   }
 
   /**
@@ -146,6 +151,18 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
       $query->createFilterQuery('discoverable_filter')->setQuery('is_discoverable:true');
       // $query->createFilterQuery('whca_filter')->setQuery('-adminset__title__display:WHCA Pool Reports');
     }
+
+    $fields = $search_index->getFields();
+    $field_keys = [];
+    foreach ($fields as $k => $f) {
+      if ($f->getType() != 'text') {
+        array_push($field_keys, $k);
+      }  
+    }
+    $configured_fields = implode(',', $field_keys) . ',score,id';
+
+    $query->setFields($configured_fields);
+    
     return;
 
     $index_id = $search_index->id();
