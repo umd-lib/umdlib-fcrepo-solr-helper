@@ -10,7 +10,8 @@ use Drupal\search_api\Item\FieldInterface;
 use Drupal\search_api\Query\QueryInterface as SapiQueryInterface;
 use Solarium\Core\Query\QueryInterface as SolariumQueryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\search_api\Item\Field;
+use Drupal\search_api\Item\Field as SearchField;
+use Solarium\Component\Result\Highlighting;
 
 /**
  * Alters the query where necessary to implement business logic.
@@ -34,15 +35,47 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
    */
   public function postExtractResults(PostExtractResultsEvent $event): void {
     $query = $event->getSearchApiQuery();
-    // dsm($query);
-    // $query = $event->getSolariumQuery();
-    // dsm($query);
-    return;
 
     $search_index = $query->getIndex();
     if (empty($search_index)) {
       return;
     }
+
+    $res = $event->getSolariumResult();
+    $highlights_raw = $res->getHighlighting();
+    $highlights = $highlights_raw->getResults();
+    $res2 = $event->getSearchApiResultSet();
+    $items = $res2->getResultItems();
+
+    foreach ($items as $key => $item) {
+      $short_key = str_replace('solr_document/', '', $key);
+      if (!empty($highlights[$short_key])) {
+        $h_fields = $highlights[$short_key]->getFields();
+        $f = NULL;
+        foreach ($h_fields as $h_key => $h_val) {
+          if (is_array($h_val)) {
+            $h_val = reset($h_val);
+          }
+          if (!empty($h_val)) {
+            $item->setExcerpt($h_val);
+          }
+          
+          // if (!empty($h_val)) {
+          //   dsm($h_key);
+          //   dsm($val);
+          //   $f = new SearchField($search_index, $h_key);
+          //   $f->setValues($h_val);
+          // }
+          // if (!empty($f)) {
+          //   // $item->setField($h_key, $f);
+          //   $item->setExcerpt(reset($h_val));
+          // }
+
+        }
+      }
+    }
+    $res2->setResultItems($items);
+    return;
 
     $server_id = $search_index->getServerId();
     if ($server_id != "fcrepo") {
@@ -65,8 +98,10 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     // }
 
 
-    // dsm($sapi_results);
 
+    // This is potentially useful code for digging into nested
+    // results. Not currently used but keeping for future use.
+    //
     // if (!empty($search_index)) {
     //   $index_id = $search_index->id();
     //   if (!str_contains($index_id, "_nested")) {
@@ -123,9 +158,8 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
   }
 
   public function postQuery(PostConvertedQueryEvent $event): void {
-    $query = $event->getSolariumQuery();
-    // dsm($query);
-    $search_query = $event->getSearchApiQuery();
+    // $query = $event->getSolariumQuery();
+    // $search_query = $event->getSearchApiQuery();
   }
 
   /**
@@ -149,9 +183,11 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     $index_id = $search_index->id();
     if ($index_id == 'searcher') {
       $query->createFilterQuery('discoverable_filter')->setQuery('is_discoverable:true');
+      // Prevent WHPool from creeping into results
       // $query->createFilterQuery('whca_filter')->setQuery('-adminset__title__display:WHCA Pool Reports');
     }
 
+    // Only request configured fields.
     $fields = $search_index->getFields();
     $field_keys = [];
     foreach ($fields as $k => $f) {
@@ -162,9 +198,9 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     $configured_fields = implode(',', $field_keys) . ',score,id';
 
     $query->setFields($configured_fields);
-    
     return;
 
+    // Add nested fields back to result.
     $index_id = $search_index->id();
     if (!str_contains($index_id, "_nested")) {
       return;
