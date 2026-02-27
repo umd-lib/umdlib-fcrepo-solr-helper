@@ -52,7 +52,7 @@
   {# action area #}
   {% if (actions_heading or handle or aeon_url or downloadable or configurable_button) %}
     {% if actions_heading %}
-      <h2 class="t-title-medium s-margin-general-medium">{{ actions_heading }}</h2>
+      <h2 class="t-title-medium s-margin-heading-medium">{{ actions_heading }}</h2>
     {% endif %}
 
     <div class="action-area s-margin-general-medium">
@@ -86,7 +86,7 @@
   {% endif %}
 
   {# metadata area #}
-  <h2 class="t-title-medium s-margin-general-medium">{{ metadata_heading }}</h2>
+  <h2 class="t-title-medium s-margin-heading-medium">{{ metadata_heading }}</h2>
   <dl class="metadata-list s-margin-general-medium">
     {% if title %}
       <div>
@@ -227,7 +227,7 @@
 
   {# collection area #}
   {% if collection %}
-    <h2 class="t-title-medium s-margin-general-medium">{{ collections_heading }}</h2>
+    <h2 class="t-title-medium s-margin-heading-medium">{{ collections_heading }}</h2>
     <dl class="collection-list s-margin-general-medium">
       {{ collection }}
     </dl>
