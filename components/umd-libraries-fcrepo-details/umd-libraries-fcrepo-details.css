@@ -111,11 +111,11 @@
   padding: 1rem;
 }
 
-.umd-lib.fcrepo-details dl.collection-list > div > div dd {
+.umd-lib.fcrepo-details dl.collection-list > div dd {
   padding: 1rem 1rem 0rem 1rem;
 }
 
-.umd-lib.fcrepo-details dl.collection-list > div > div dd:last-child {
+.umd-lib.fcrepo-details dl.collection-list > div dd:last-child {
   padding: 1rem;
 }
 
@@ -124,32 +124,37 @@
     gap: 1rem;
   }
 
-  .umd-lib.fcrepo-details dl.metadata-list > div,
-  .umd-lib.fcrepo-details dl.collection-list > div {
+  .umd-lib.fcrepo-details dl.metadata-list > div {
     flex-direction: row;
   }
 
-  .umd-lib.fcrepo-details dl.metadata-list > div dt,
-  .umd-lib.fcrepo-details dl.collection-list > div dt {
+  .umd-lib.fcrepo-details dl.metadata-list > div dt {
     padding: 1.5rem;
 
     flex: 0 0 240px;
   }
 
   .umd-lib.fcrepo-details dl.metadata-list > div dd,
-  .umd-lib.fcrepo-details dl.collection-list > div > div dd {
+  .umd-lib.fcrepo-details dl.collection-list > div dd {
     padding: 1.5rem;
   }
 
-  .umd-lib.fcrepo-details dl.collection-list > div > div {
-    flex: 1 1 auto;
+  /* use grid layout for collection list */
+  .umd-lib.fcrepo-details dl.collection-list > div {
+    display: grid;
+    grid-template-columns: 240px 1fr;
   }
 
-  .umd-lib.fcrepo-details dl.collection-list > div > div dd {
+  .umd-lib.fcrepo-details dl.collection-list > div dt {
+    padding: 1.5rem;
+    grid-row: 1 / 999;
+  }
+
+  .umd-lib.fcrepo-details dl.collection-list > div dd {
     border-bottom: 1px solid var(--light-gray);
   }
 
-  .umd-lib.fcrepo-details dl.collection-list > div > div dd:last-child {
+  .umd-lib.fcrepo-details dl.collection-list > div dd:last-child {
     padding: 1.5rem;
     border-bottom: none;
   }
