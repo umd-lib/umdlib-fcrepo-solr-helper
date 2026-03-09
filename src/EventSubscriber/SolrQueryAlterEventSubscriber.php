@@ -34,8 +34,8 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public function postExtractResults(PostExtractResultsEvent $event): void {
-    $query = $event->getSearchApiQuery();
-    $query = $event->getSolariumQuery();
+    // $query = $event->getSearchApiQuery();
+    // $query = $event->getSolariumQuery();
     // dsm($query);
     return;
 
