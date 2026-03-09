@@ -35,7 +35,25 @@ class FCRepoTwigExtension extends AbstractExtension {
           $this,
           'compareMarkupValues'
         ]),
+        new TwigFunction('check_remote_mime', [
+          $this,
+          'checkRemoteMimeType'
+        ]),
     ];
+  }
+
+  public function checkRemoteMimeType($url, $mime) {
+    $headers = get_headers($url, 1);
+    dsm($headers);
+    dsm($mime);
+    if (is_array($headers) && !empty($headers['Content-Type'])) {
+      if (is_array($headers['Content-Type'])) {
+        return in_array($mime, $headers['Content-Type']);
+      } else {
+        return str_contains($headers['Content-Type'], $mime);
+      }
+    }
+    return false;
   }
 
   public function compareMarkupValues($field, $values, $fuzzy = true) {
