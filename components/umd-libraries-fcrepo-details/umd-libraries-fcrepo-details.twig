@@ -73,7 +73,9 @@
           </a>
         {% endif %}
         {% if downloadable %}
-          <a class="button umd-lib" role="button" href="{{ downloadable }}">{{ downloadable_label|default('PDF Download') }}</a>
+          {% if check_remote_mime(downloadable, 'application/pdf') %}
+            <a class="button umd-lib" role="button" href="{{ downloadable }}">{{ downloadable_label|default('PDF Download') }}</a>
+          {% endif %}
         {% endif %}
         {% if configurable_button %}
           <a target="_blank" href="{{ configurable_button }}" class="button umd-lib">
