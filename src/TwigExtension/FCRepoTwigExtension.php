@@ -42,10 +42,12 @@ class FCRepoTwigExtension extends AbstractExtension {
     ];
   }
 
-  public function checkRemoteMimeType($url, $mime) {
+  public function checkRemoteMimeType($field, $mime) {
+    $url = $this->getUIPatternFieldValue($field);
+    if (empty($url)) {
+      return false;
+    }
     $headers = get_headers($url, 1);
-    dsm($headers);
-    dsm($mime);
     if (is_array($headers) && !empty($headers['Content-Type'])) {
       if (is_array($headers['Content-Type'])) {
         return in_array($mime, $headers['Content-Type']);
@@ -92,7 +94,7 @@ class FCRepoTwigExtension extends AbstractExtension {
         }
       }
     }
-    return $field;
+    return trim($field);
   }
 
   public function getPageNumber() {
