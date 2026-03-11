@@ -40,26 +40,15 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     return;
 
     $search_index = $query->getIndex();
-    if (empty($search_index)) {
-      return;
-    }
 
     $res = $event->getSolariumResult();
-    if (empty($res)) {
-      return;
-    }
+
     $highlights_raw = $res->getHighlighting();
-    if (empty($highlights_raw)) {
-      return;
-    }
+
     $highlights = $highlights_raw->getResults();
-    if (empty($highlights)) {
-      return;
-    }
+
     $res2 = $event->getSearchApiResultSet();
-    if (empty($res2)) {
-      return;
-    }
+
     $items = $res2->getResultItems();
 
     foreach ($items as $key => $item) {
