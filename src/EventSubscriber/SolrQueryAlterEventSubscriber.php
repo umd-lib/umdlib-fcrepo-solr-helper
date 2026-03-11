@@ -202,8 +202,9 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     $field_keys = [];
     foreach ($fields as $k => $f) {
       if ($f->getType() != 'text') {
-        array_push($field_keys, $k);
+        // Prevent full text fields from being added. Temporarily removed.
       }  
+      array_push($field_keys, $k);
     }
     $configured_fields = implode(',', $field_keys) . ',score,id';
 
