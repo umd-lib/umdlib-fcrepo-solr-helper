@@ -34,22 +34,40 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public function postExtractResults(PostExtractResultsEvent $event): void {
-    // $query = $event->getSearchApiQuery();
-    // $query = $event->getSolariumQuery();
-    // dsm($query);
-    return;
+    $query = $event->getSearchApiQuery();
+    if (empty($query)) {
+      return;
+    }
 
     $search_index = $query->getIndex();
+    if (empty($search_index)) {
+      return;
+    }
 
     $res = $event->getSolariumResult();
+    if (empty($res)) {
+      return;
+    }
 
     $highlights_raw = $res->getHighlighting();
+    if (empty($highlights_raw)) {
+      return;
+    }
 
     $highlights = $highlights_raw->getResults();
+    if (empty($highlights)) {
+      return;
+    }
 
     $res2 = $event->getSearchApiResultSet();
+    if (empty($res2)) {
+      return;
+    }
 
     $items = $res2->getResultItems();
+    if (empty($items)) {
+      return;
+    }
 
     foreach ($items as $key => $item) {
       $short_key = str_replace('solr_document/', '', $key);
@@ -202,9 +220,9 @@ class SolrQueryAlterEventSubscriber implements EventSubscriberInterface {
     $field_keys = [];
     foreach ($fields as $k => $f) {
       if ($f->getType() != 'text') {
-        // Prevent full text fields from being added. Temporarily removed.
+        // Prevent full text fields from being added.
+        array_push($field_keys, $k);
       }  
-      array_push($field_keys, $k);
     }
     $configured_fields = implode(',', $field_keys) . ',score,id';
 
