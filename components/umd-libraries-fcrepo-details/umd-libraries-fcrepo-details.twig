@@ -39,16 +39,29 @@
       {% endif %}
     {% endif %}
     <div class="mirador-viewer--container s-margin-general-medium">
-      <iframe class="mirador-viewer is-loading"
-        id="iiif-mirador-viewer"
-        title="Mirador Object"
-        src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}&page={{ get_page_number() }}"
-        scrolling="no"
-        allowfullscreen="true"
-        webkitallowfullscreen="true"
-        mozallowfullscreen="true">
-          {{ error_message }}
-      </iframe>
+      {% if viewer_version_4 %}
+        <iframe class="mirador-viewer is-loading"
+          id="iiif-mirador-viewer"
+          title="Mirador Object"
+          src="{{ effective_iiif_base }}https://iiif.lib.umd.edu/manifests/{{ iiif_prefix }}/manifest&q={{ fc_url_query() }}&n={{ get_page_number() }}
+          scrolling="no"
+          allowfullscreen="true"
+          webkitallowfullscreen="true"
+          mozallowfullscreen="true">
+            {{ error_message }}
+        </iframe>
+      {% else %}
+        <iframe class="mirador-viewer is-loading"
+          id="iiif-mirador-viewer"
+          title="Mirador Object"
+          src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}&page={{ get_page_number() }}"
+          scrolling="no"
+          allowfullscreen="true"
+          webkitallowfullscreen="true"
+          mozallowfullscreen="true">
+            {{ error_message }}
+        </iframe>
+      {% endif %}
       <div class="mirador-viewer-loading-animation" id="mirador-loading-animation" aria-hidden="true">
       </div>
     </div>

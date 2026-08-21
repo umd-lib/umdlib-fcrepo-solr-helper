@@ -11,6 +11,10 @@ props:
       type: string
       title: Classes
       description: "CSS Classes to add to the component"
+    viewer_version_4:
+      type: boolean
+      title: Use IIIF Viewer Version 4
+      description: "If true, use IIIF viewer version 4. If false, use version 3."
     metadata_heading:
       type: string
       title: Metadata Heading
