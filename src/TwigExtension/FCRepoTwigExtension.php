@@ -60,11 +60,12 @@ class FCRepoTwigExtension extends AbstractExtension {
 
   public function compareMarkupValues($field, $values, $fuzzy = true) {
     $field = $this->getUIPatternFieldValue($field);
+    $raw_values = $values;
     if ($values instanceof Markup) {
       $raw_values = $values->__toString();
     }
     if (is_string($field) && is_string($raw_values)) {
-      $compare_array = explode(",", $raw_values);
+      $compare_array = explode(",", trim($raw_values));
       foreach ($compare_array as $compare) {
         if ($fuzzy) {
           if (str_contains(strtolower($field), strtolower($compare))) {
