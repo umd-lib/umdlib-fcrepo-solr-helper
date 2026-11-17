@@ -51,7 +51,7 @@
             {{ error_message }}
         </iframe>
       {% else %}
-        <iframe class="mirador-viewer is-loading"
+        <iframe class="mirador-viewer"
           id="iiif-mirador-viewer"
           title="Mirador Object"
           src="{{ effective_iiif_base }}{{ iiif_id }}&iiifURLPrefix={{ iiif_prefix }}&q={{ fc_url_query() }}&page={{ get_page_number() }}"
@@ -62,8 +62,6 @@
             {{ error_message }}
         </iframe>
       {% endif %}
-      <div class="mirador-viewer-loading-animation" id="mirador-loading-animation" aria-hidden="true">
-      </div>
     </div>
   {% endif %}
 
