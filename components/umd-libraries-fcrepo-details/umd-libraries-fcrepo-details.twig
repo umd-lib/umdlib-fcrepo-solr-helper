@@ -40,7 +40,7 @@
     {% endif %}
     <div class="mirador-viewer--container s-margin-general-medium">
       {% if viewer_version_4 %}
-        <iframe class="mirador-viewer is-loading"
+        <iframe class="mirador-viewer"
           id="iiif-mirador-viewer"
           title="Mirador Object"
           src="{{ effective_iiif_base }}{{ iiif_prefix }}{{ iiif_id }}/manifest&q={{ fc_url_query() }}&n={{ get_page_number() }}"

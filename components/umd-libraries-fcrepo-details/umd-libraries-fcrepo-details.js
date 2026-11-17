@@ -125,16 +125,3 @@ window.ClipboardJS = window.ClipboardJS || Clipboard;
     },
   };
 })(jQuery, Drupal, once);
-
-// loading animation for iiif mirador viewer
-document.addEventListener("DOMContentLoaded", function () {
-  const iframe = document.getElementById("iiif-mirador-viewer");
-  const loader = document.getElementById("mirador-loading-animation");
-
-  if (iframe && loader) {
-    iframe.addEventListener("load", () => {
-      iframe.classList.remove("is-loading");
-      loader.classList.add("hidden");
-    });
-  }
-});
